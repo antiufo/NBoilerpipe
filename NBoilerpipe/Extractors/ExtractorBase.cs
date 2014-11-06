@@ -48,7 +48,9 @@ namespace NBoilerpipe.Extractors
         {
             var parser = new NBoilerpipeHtmlParser(new NBoilerpipeContentHandler());
             parser.Traverse(document);
-            return parser.ToTextDocument();
+            var d = parser.ToTextDocument();
+            Process(d);
+            return d;
         }
 
         /// <summary>
