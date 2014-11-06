@@ -45,7 +45,7 @@ namespace NBoilerpipe.Extractors
 				| BlockProximityFusion.MAX_DISTANCE_1.Process (doc)
                 | BoilerplateBlockFilter.INSTANCE_KEEP_TITLE.Process(doc) 
 				| BlockProximityFusion.MAX_DISTANCE_1_CONTENT_ONLY.Process (doc)
-                | KeepLargestBlockFilter.INSTANCE_EXPAND_TO_SAME_TAGLEVEL.Process(doc) 
+                | KeepLargestBlockFilter.INSTANCE_EXPAND_TO_SAME_TAGLEVEL_MIN_WORDS.Process(doc) 
 				| ExpandTitleToContentFilter.INSTANCE.Process (doc);
 			
 			return ret;
