@@ -63,6 +63,13 @@ namespace NBoilerpipe.Filters.English
                             changes = true;
                         }
                     }
+                    else if (tb.GetLinkDensity() == 1.0)
+                    {
+                        if (text.Equals("Comment"))
+                        {
+                            tb.AddLabel(DefaultLabels.INDICATES_END_OF_TEXT);
+                        }
+                    }
                 }
             }
             // timeSpent += System.currentTimeMillis() - t;
