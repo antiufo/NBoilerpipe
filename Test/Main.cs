@@ -1,4 +1,5 @@
 using NBoilerpipe.Extractors;
+using Shaman.Dom;
 using System;
 using System.IO;
 using System.Net;
@@ -22,9 +23,11 @@ namespace Test
             {
                 page = streamReader.ReadToEnd();
             }
-
-            String text = ArticleExtractor.INSTANCE.GetText(page);
-            Console.WriteLine("Text: \n" + text);
+            var doc = new  HtmlDocument();
+            doc.LoadHtml(page);
+            var d = ArticleExtractor.INSTANCE.GetDocument(doc.DocumentNode);
+            //String text = ArticleExtractor.INSTANCE.GetText(doc.DocumentNode);
+            Console.WriteLine("Text: \n" + d.GetText(true, false));
         }
     }
 }

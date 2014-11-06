@@ -89,7 +89,6 @@
     <Compile Include="BoilerpipeExtractor.cs" />
     <Compile Include="BoilerpipeFilter.cs" />
     <Compile Include="BoilerpipeInput.cs" />
-    <Compile Include="BoilerpipeProcessingException.cs" />
     <Compile Include="Conditions\TextBlockCondition.cs" />
     <Compile Include="Document\TextBlock.cs" />
     <Compile Include="Document\TextDocument.cs" />

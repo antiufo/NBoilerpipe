@@ -51,7 +51,7 @@ namespace NBoilerpipe.Filters.Simple
                 ICollection<string> labels = tb.GetLabels();
                 foreach (string p in paragraphs)
                 {
-                    TextBlock tbP = new TextBlock(p);
+                    TextBlock tbP = new TextBlock(p, tb.Node);
                     tbP.SetIsContent(isContent);
                     tbP.AddLabels(labels);
                     blocksNew.AddItem(tbP);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Linq;
 using Shaman.Dom;
 using NBoilerpipe.Parser;
 using NBoilerpipe.Document;
@@ -54,6 +55,7 @@ namespace NBoilerpipe
 
         public void StartElement(HtmlNode node)
         {
+            nodeStack.Push(node);
             labelStacks.AddItem(null);
             TagAction ta = tagActions.Get(node.TagName);
             if (ta != null)
@@ -95,6 +97,7 @@ namespace NBoilerpipe
             lastEvent = NBoilerpipeContentHandler.Event.END_TAG;
             lastEndTag = node.TagName;
             labelStacks.RemoveLast();
+            nodeStack.Pop();
         }
 
         public void HandleText(HtmlTextNode node)
@@ -190,6 +193,8 @@ namespace NBoilerpipe
             {
                 blockTagLevel = tagLevel;
             }
+            if (blockFirstNode == null) blockFirstNode = nodeStack.Peek();
+
             textBuilder.Append(ch, start, length);
             tokenBuilder.Append(ch, start, length);
             if (endWhitespace)
@@ -213,8 +218,12 @@ namespace NBoilerpipe
             return char.IsWhiteSpace(ch);
         }
 
+        private HtmlNode blockFirstNode;
+
         public void FlushBlock()
         {
+            var firstNode = this.blockFirstNode;
+            this.blockFirstNode = null;
             if (inBody == 0)
             {
                 if (inBody == 0 && "TITLE".Equals(lastStartTag, StringComparison.OrdinalIgnoreCase))
@@ -303,7 +312,7 @@ namespace NBoilerpipe
                 numWordsInWrappedLines = numWords - numWordsCurrentLine;
             }
             TextBlock tb = new TextBlock(textBuilder.ToString().Trim(), currentContainedTextElements
-                , numWords, numLinkedWords, numWordsInWrappedLines, numWrappedLines, offsetBlocks
+                , numWords, numLinkedWords, numWordsInWrappedLines, numWrappedLines, offsetBlocks, GetCommonAncestor(firstNode, nodeStack.Peek())
                 );
             currentContainedTextElements = new BitSet();
             offsetBlocks++;
@@ -313,6 +322,19 @@ namespace NBoilerpipe
             AddTextBlock(tb);
             blockTagLevel = -1;
         }
+
+        private HtmlNode GetCommonAncestor(HtmlNode a, HtmlNode b)
+        {
+            if (a == null) return b;
+            if (b == null) return a;
+            if (a.ParentNode == b) return b;
+            if (a == b) return a;
+            var ancestors = a.AncestorsAndSelf().ToList();
+            return b.AncestorsAndSelf().FirstOrDefault(x => ancestors.Contains(x));
+        }
+
+        private Stack<HtmlNode> nodeStack = new Stack<HtmlNode>();
+
 
         static bool IsWord(string token)
         {

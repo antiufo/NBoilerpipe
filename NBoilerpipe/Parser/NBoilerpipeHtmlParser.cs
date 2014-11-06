@@ -25,7 +25,7 @@ namespace NBoilerpipe.Parser
             Traverse(htmlDocument.DocumentNode);
         }
 
-        private void Traverse(HtmlNode node)
+        public void Traverse(HtmlNode node)
         {
             if (node.NodeType == HtmlNodeType.Element)
             {
@@ -45,6 +45,7 @@ namespace NBoilerpipe.Parser
             if (node.NodeType == HtmlNodeType.Element)
                 contentHandler.EndElement(node);
         }
+
 
         public TextDocument ToTextDocument()
         {

@@ -10,6 +10,7 @@ using NBoilerpipe.Document;
 using NBoilerpipe.Extractors;
 using NBoilerpipe.Parser;
 using Sharpen;
+using Shaman.Dom;
 
 namespace NBoilerpipe.Extractors
 {
@@ -29,17 +30,25 @@ namespace NBoilerpipe.Extractors
         /// 	</exception>
         public virtual string GetText(string html)
         {
-            try
-            {
 
-                NBoilerpipeHtmlParser parser = new NBoilerpipeHtmlParser(new NBoilerpipeContentHandler());
-                parser.Parse(html);
-                return GetText(parser.ToTextDocument());
-            }
-            catch (Exception e)
-            {
-                throw new BoilerpipeProcessingException(e.ToString());
-            }
+            var parser = new NBoilerpipeHtmlParser(new NBoilerpipeContentHandler());
+            parser.Parse(html);
+            return GetText(parser.ToTextDocument());
+
+        }
+
+        public string GetText(HtmlNode document)
+        {
+            var parser = new NBoilerpipeHtmlParser(new NBoilerpipeContentHandler());
+            parser.Traverse(document);
+            return GetText(parser.ToTextDocument());
+        }
+
+        public TextDocument GetDocument(HtmlNode document)
+        {
+            var parser = new NBoilerpipeHtmlParser(new NBoilerpipeContentHandler());
+            parser.Traverse(document);
+            return parser.ToTextDocument();
         }
 
         /// <summary>

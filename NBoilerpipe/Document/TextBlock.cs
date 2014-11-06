@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Sharpen;
+using Shaman.Dom;
 
 namespace NBoilerpipe.Document
 {
@@ -35,19 +36,21 @@ namespace NBoilerpipe.Document
         int tagLevel;
         static readonly BitSet EMPTY_BITSET = new BitSet();
 
+        public readonly HtmlNode Node;
+
         public static readonly NBoilerpipe.Document.TextBlock EMPTY_START = new NBoilerpipe.Document.TextBlock
-            (string.Empty, EMPTY_BITSET, 0, 0, 0, 0, -1);
+            (string.Empty, EMPTY_BITSET, 0, 0, 0, 0, -1, null);
 
         public static readonly NBoilerpipe.Document.TextBlock EMPTY_END = new NBoilerpipe.Document.TextBlock
-            (string.Empty, EMPTY_BITSET, 0, 0, 0, 0, int.MaxValue);
+            (string.Empty, EMPTY_BITSET, 0, 0, 0, 0, int.MaxValue, null);
 
-        public TextBlock(string text)
-            : this(text, null, 0, 0, 0, 0, 0)
+        public TextBlock(string text, HtmlNode node)
+            : this(text, null, 0, 0, 0, 0, 0, node)
         {
         }
 
         public TextBlock(string text, BitSet containedTextElements, int numWords, int numWordsInAnchorText
-            , int numWordsInWrappedLines, int numWrappedLines, int offsetBlocks)
+            , int numWordsInWrappedLines, int numWrappedLines, int offsetBlocks, HtmlNode node)
         {
             this.text = text;
             this.containedTextElements = containedTextElements;
@@ -57,6 +60,7 @@ namespace NBoilerpipe.Document
             this.numWrappedLines = numWrappedLines;
             this.offsetBlocksStart = offsetBlocks;
             this.offsetBlocksEnd = offsetBlocks;
+            this.Node = node;
             InitDensities();
         }
 
@@ -275,7 +279,7 @@ namespace NBoilerpipe.Document
 
         public Object Clone()
         {
-            TextBlock clone = new TextBlock(text.ToString());
+            TextBlock clone = new TextBlock(text.ToString(), Node);
 
             if (labels != null && !labels.IsEmpty())
             {
