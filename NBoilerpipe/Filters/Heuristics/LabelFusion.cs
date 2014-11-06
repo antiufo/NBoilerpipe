@@ -17,7 +17,7 @@ namespace NBoilerpipe.Filters.Heuristics
 	public sealed class LabelFusion : BoilerpipeFilter
 	{
 		public static readonly NBoilerpipe.Filters.Heuristics.LabelFusion INSTANCE = new 
-			NBoilerpipe.Filters.Heuristics.LabelFusion(string.Empty);
+			NBoilerpipe.Filters.Heuristics.LabelFusion();
 
 		private readonly string labelPrefix;
 
@@ -28,9 +28,8 @@ namespace NBoilerpipe.Filters.Heuristics
 		/// </summary>
 		/// <param name="maxBlocksDistance">The maximum distance in blocks.</param>
 		/// <param name="contentOnly"></param>
-		public LabelFusion(string labelPrefix)
+		public LabelFusion()
 		{
-			this.labelPrefix = labelPrefix;
 		}
 
 		/// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
@@ -75,7 +74,8 @@ namespace NBoilerpipe.Filters.Heuristics
 			ICollection<string> set = new HashSet<string>(set1);
 			for (Iterator<string> it = set.Iterator(); it.HasNext(); )
 			{
-				if (!it.Next().StartsWith(DefaultLabels.MARKUP_PREFIX))
+                var label = it.Next();
+                if (!label.StartsWith(DefaultLabels.MARKUP_PREFIX))
 				{
 					it.Remove();
 				}
