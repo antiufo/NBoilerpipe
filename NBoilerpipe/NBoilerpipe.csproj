@@ -89,6 +89,8 @@
     <Compile Include="Labels\ConditionalLabelAction.cs" />
     <Compile Include="Labels\DefaultLabels.cs" />
     <Compile Include="Labels\LabelAction.cs" />
+    <Compile Include="Parser\Image.cs" />
+    <Compile Include="Parser\ImageExtractor.cs" />
     <Compile Include="Util\UnicodeTokenizer.cs" />
     <Compile Include="Parser\NBoilerpipeContentHandler.cs" />
     <Compile Include="Parser\NBoilerpipeHtmlParser.cs" />
