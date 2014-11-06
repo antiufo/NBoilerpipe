@@ -53,7 +53,6 @@ namespace NBoilerpipe.Filters.English
 			}
 			int max = -1;
 			TextBlock largestBlock = null;
-			int index = 0;
 			foreach (TextBlock tb in textBlocks)
 			{
 				if (!tb.IsContent())
@@ -66,7 +65,6 @@ namespace NBoilerpipe.Filters.English
 					largestBlock = tb;
 					max = numWords;
 				}
-				index++;
 			}
 			if (largestBlock == null)
 			{
