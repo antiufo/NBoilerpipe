@@ -32,7 +32,7 @@ namespace NBoilerpipe.Filters.Heuristics
              = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true, 0);
 
         public static readonly NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter INSTANCE_EXPAND_TO_SAME_TAGLEVEL_MIN_WORDS
-             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true, 100);
+             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true, 150);
         private readonly bool expandToSameLevelText;
         private readonly int minWords;
 
