@@ -323,7 +323,7 @@ namespace NBoilerpipe
             blockTagLevel = -1;
         }
 
-        private HtmlNode GetCommonAncestor(HtmlNode a, HtmlNode b)
+        public static HtmlNode GetCommonAncestor(HtmlNode a, HtmlNode b)
         {
             if (a == null) return b;
             if (b == null) return a;
