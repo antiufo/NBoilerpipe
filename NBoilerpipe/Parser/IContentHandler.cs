@@ -1,5 +1,5 @@
 ﻿using System;
-using HtmlAgilityPack;
+using Shaman.Dom;
 
 namespace NBoilerpipe.Parser
 {

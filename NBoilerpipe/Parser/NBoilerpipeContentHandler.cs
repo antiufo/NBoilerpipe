@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
+using Shaman.Dom;
 using NBoilerpipe.Parser;
 using NBoilerpipe.Document;
 using NBoilerpipe.Labels;
@@ -55,25 +55,25 @@ namespace NBoilerpipe
 		public void StartElement (HtmlNode node)
 		{
 			labelStacks.AddItem (null);
-			TagAction ta = tagActions.Get (node.Name);
+			TagAction ta = tagActions.Get (node.TagName);
 			if (ta != null) {
 				if (ta.ChangesTagLevel ()) {
 					tagLevel++;
 				}
-				flush = ta.Start (this, node.Name, node.Attributes) | flush;
+                flush = ta.Start(this, node.TagName, node.Attributes) | flush;
 			} else {
 				tagLevel++;
 				flush = true;
 			}
 			lastEvent = NBoilerpipeContentHandler.Event.START_TAG;
-			lastStartTag = node.Name;
+            lastStartTag = node.TagName;
 		}
 		
 		public void EndElement (HtmlNode node)
 		{
-			TagAction ta = tagActions.Get (node.Name);
+            TagAction ta = tagActions.Get(node.TagName);
 			if (ta != null) {
-				flush = ta.End (this, node.Name) | flush;
+                flush = ta.End(this, node.TagName) | flush;
 			} else {
 				flush = true;
 			}
@@ -84,7 +84,7 @@ namespace NBoilerpipe
 				FlushBlock ();
 			}
 			lastEvent = NBoilerpipeContentHandler.Event.END_TAG;
-			lastEndTag = node.Name;
+            lastEndTag = node.TagName;
 			labelStacks.RemoveLast ();
 		}
 		

@@ -7,7 +7,6 @@ using System.Collections.Specialized;
 
 namespace Sharpen
 {
-	using ICSharpCode.SharpZipLib.Zip.Compression;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
@@ -141,10 +140,6 @@ namespace Sharpen
 		public static ICollection<KeyValuePair<T, U>> EntrySet<T, U> (this IDictionary<T, U> s)
 		{
 			return s;
-		}
-
-		public static void Finish (this Inflater i)
-		{
 		}
 		
 		public static bool AddItem<T> (this IList<T> list, T item)
@@ -606,22 +601,6 @@ namespace Sharpen
 		public static T ValueOf<T> (T val)
 		{
 			return val;
-		}
-
-		public static int GetTotalInFixed (this Inflater inf)
-		{
-			if (inf.TotalIn > 0)
-				return inf.TotalIn + 4;
-			else
-				return 0;
-		}
-		
-		public static int GetRemainingInputFixed (this Inflater inf)
-		{
-			if (inf.RemainingInput >= 4)
-				return inf.RemainingInput - 4;
-			else
-				return 0;
 		}
 		
 		public static string GetTestName (object obj)

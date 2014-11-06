@@ -7,11 +7,6 @@ namespace Sharpen
 	public class PrintWriter : TextWriter
 	{
 		TextWriter writer;
-		
-		public PrintWriter (FilePath path)
-		{
-			writer = new StreamWriter (path);
-		}
 
 		public PrintWriter (TextWriter other)
 		{

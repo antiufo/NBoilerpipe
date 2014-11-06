@@ -6,7 +6,7 @@
 using System;
 using NBoilerpipe.Labels;
 using Sharpen;
-using HtmlAgilityPack;
+using Shaman.Dom;
 
 namespace NBoilerpipe.Parser
 {

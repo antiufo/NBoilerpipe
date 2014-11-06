@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using NBoilerpipe.Labels;
 using Sharpen;
-using HtmlAgilityPack;
+using Shaman.Dom;
 
 namespace NBoilerpipe.Parser
 {
@@ -56,7 +56,7 @@ namespace NBoilerpipe.Parser
 				}
 			}
 			var att = atts["id"];
-			var id =  ( atts !=null) ? att.Name : "";
+            var id = att.Value;
 			if (id != null && id.Length > 0) {
 				id = PAT_NUM.Matcher (id).ReplaceAll ("#");
 				labels.AddItem (DefaultLabels.MARKUP_PREFIX + "#" + id);

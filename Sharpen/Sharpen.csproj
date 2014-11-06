@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,10 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
     <Reference Include="System.Core" />
-    <Reference Include="ICSharpCode.SharpZipLib" />
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -76,7 +73,6 @@
     <Compile Include="CountDownLatch.cs" />
     <Compile Include="CyclicBarrier.cs" />
     <Compile Include="DataConverter.cs" />
-    <Compile Include="DeflaterOutputStream.cs" />
     <Compile Include="DigestOutputStream.cs" />
     <Compile Include="EnumSet.cs" />
     <Compile Include="EnumerableWrapper.cs" />
@@ -87,20 +83,13 @@
     <Compile Include="Executors.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FileChannel.cs" />
-    <Compile Include="FileInputStream.cs" />
     <Compile Include="FileLock.cs" />
-    <Compile Include="FileOutputStream.cs" />
-    <Compile Include="FilePath.cs" />
-    <Compile Include="FileReader.cs" />
-    <Compile Include="FileWriter.cs" />
-    <Compile Include="FilenameFilter.cs" />
     <Compile Include="FilterInputStream.cs" />
     <Compile Include="FilterOutputStream.cs" />
     <Compile Include="Future.cs" />
     <Compile Include="GZIPInputStream.cs" />
     <Compile Include="GZIPOutputStream.cs" />
     <Compile Include="HttpURLConnection.cs" />
-    <Compile Include="InflaterInputStream.cs" />
     <Compile Include="InheritableThreadLocal.cs" />
     <Compile Include="InputStream.cs" />
     <Compile Include="InputStreamReader.cs" />
@@ -127,7 +116,6 @@
     <Compile Include="Process.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="ProxySelector.cs" />
-    <Compile Include="RandomAccessFile.cs" />
     <Compile Include="ReentrantLock.cs" />
     <Compile Include="Reference.cs" />
     <Compile Include="ReferenceQueue.cs" />
@@ -146,7 +134,6 @@
     <Compile Include="TimeUnit.cs" />
     <Compile Include="TreeSet.cs" />
     <Compile Include="TrustManager.cs" />
-    <Compile Include="URLEncoder.cs" />
     <Compile Include="WeakReference.cs" />
     <Compile Include="WrappedSystemStream.cs" />
     <Compile Include="X509Certificate.cs" />
