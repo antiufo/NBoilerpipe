@@ -43,6 +43,11 @@ namespace NBoilerpipe.Filters.Heuristics
                     this.potentialTitles = new HashSet<string>();
                     potentialTitles.AddItem(title);
                     string p;
+                    p = GetLongestPart(title, "[ ]*[\\|»|-][ ]*");
+                    if (p != null)
+                    {
+                        potentialTitles.AddItem(p);
+                    }
                     p = GetLongestPart(title, "[ ]*[\\|»|:][ ]*");
                     if (p != null)
                     {
@@ -68,6 +73,9 @@ namespace NBoilerpipe.Filters.Heuristics
                     {
                         potentialTitles.AddItem(p);
                     }
+
+                    addPotentialTitles(potentialTitles, title, "[ ]+[\\|][ ]+", 4);
+                    addPotentialTitles(potentialTitles, title, "[ ]+[\\-][ ]+", 4);
                 }
             }
         }
@@ -75,6 +83,27 @@ namespace NBoilerpipe.Filters.Heuristics
         public ICollection<string> GetPotentialTitles()
         {
             return potentialTitles;
+        }
+        private void addPotentialTitles(ICollection<string> potentialTitles, string title, string pattern, int minWords)
+        {
+            string[] parts = title.Split(pattern);
+            if (parts.Length == 1)
+            {
+                return;
+            }
+            for (int i = 0; i < parts.Length; i++)
+            {
+                var p = parts[i];
+                if (p.Contains(".com"))
+                {
+                    continue;
+                }
+                int numWords = p.Split("[\b ]+").Length;
+                if (numWords >= minWords)
+                {
+                    potentialTitles.Add(p);
+                }
+            }
         }
 
         private string GetLongestPart(string title, string pattern)
@@ -93,7 +122,7 @@ namespace NBoilerpipe.Filters.Heuristics
                 {
                     continue;
                 }
-                int numWords = p.Split("[\b]+").Length;
+                int numWords = p.Split("[\b ]+").Length;
                 if (numWords > longestNumWords || p.Length > longestPart.Length)
                 {
                     longestNumWords = numWords;
