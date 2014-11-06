@@ -45,10 +45,6 @@
       <Project>{9F880310-BA40-4DF0-BBC8-8CB78EF133D1}</Project>
       <Name>NBoilerpipe</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sharpen\Sharpen.csproj">
-      <Project>{BB30B844-5CB6-49F8-96F3-95539721EC19}</Project>
-      <Name>Sharpen</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

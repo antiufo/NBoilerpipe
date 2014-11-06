@@ -36,7 +36,7 @@ namespace NBoilerpipe.Extractors
 
         /// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
         public override bool Process(TextDocument doc)
-		{
+        {
             var ret = TerminatingBlocksFinder.INSTANCE.Process(doc)
                 | new DocumentTitleMatchClassifier(doc.GetTitle()).Process(doc)
                 | NumWordsRulesClassifier.INSTANCE.Process(doc)
@@ -49,7 +49,7 @@ namespace NBoilerpipe.Extractors
                 | ExpandTitleToContentFilter.INSTANCE.Process(doc)
                 | LargeBlockSameTagLevelToContentFilter.INSTANCE.Process(doc)
                 | ListAtEndFilter.INSTANCE.Process(doc);
-			return ret;
-		}
+            return ret;
+        }
     }
 }

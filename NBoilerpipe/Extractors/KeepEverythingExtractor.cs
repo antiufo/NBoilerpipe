@@ -10,22 +10,22 @@ using Sharpen;
 
 namespace NBoilerpipe.Extractors
 {
-	/// <summary>Marks everything as content.</summary>
-	/// <remarks>Marks everything as content.</remarks>
-	/// <author>Christian Kohlsch√ºtter</author>
-	public sealed class KeepEverythingExtractor : ExtractorBase
-	{
-		public static readonly NBoilerpipe.Extractors.KeepEverythingExtractor INSTANCE = 
-			new NBoilerpipe.Extractors.KeepEverythingExtractor();
+    /// <summary>Marks everything as content.</summary>
+    /// <remarks>Marks everything as content.</remarks>
+    /// <author>Christian Kohlsch√ºtter</author>
+    public sealed class KeepEverythingExtractor : ExtractorBase
+    {
+        public static readonly NBoilerpipe.Extractors.KeepEverythingExtractor INSTANCE =
+            new NBoilerpipe.Extractors.KeepEverythingExtractor();
 
-		public KeepEverythingExtractor()
-		{
-		}
+        public KeepEverythingExtractor()
+        {
+        }
 
-		/// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
-		public override bool Process(TextDocument doc)
-		{
-			return MarkEverythingContentFilter.INSTANCE.Process(doc);
-		}
-	}
+        /// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
+        public override bool Process(TextDocument doc)
+        {
+            return MarkEverythingContentFilter.INSTANCE.Process(doc);
+        }
+    }
 }

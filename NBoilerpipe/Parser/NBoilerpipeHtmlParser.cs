@@ -10,7 +10,7 @@ namespace NBoilerpipe.Parser
 {
     public class NBoilerpipeHtmlParser
     {
-		NBoilerpipeContentHandler contentHandler;
+        NBoilerpipeContentHandler contentHandler;
 
         public NBoilerpipeHtmlParser(NBoilerpipeContentHandler contentHandler)
         {
@@ -25,22 +25,26 @@ namespace NBoilerpipe.Parser
             Traverse(htmlDocument.DocumentNode);
         }
 
-        private void Traverse (HtmlNode node)
-		{
-			if (node.NodeType == HtmlNodeType.Element) {
-				contentHandler.StartElement (node);
-			} else if (node.NodeType == HtmlNodeType.Text) {
-				contentHandler.HandleText ((HtmlTextNode)node);
-			}
+        private void Traverse(HtmlNode node)
+        {
+            if (node.NodeType == HtmlNodeType.Element)
+            {
+                contentHandler.StartElement(node);
+            }
+            else if (node.NodeType == HtmlNodeType.Text)
+            {
+                contentHandler.HandleText((HtmlTextNode)node);
+            }
 
-			if (node.HasChildNodes) {
-				for (int i = 0; i < node.ChildNodes.Count; i++) 
-					Traverse (node.ChildNodes [i]);
-			}
-			
-			if (node.NodeType == HtmlNodeType.Element)
-				contentHandler.EndElement (node);
-		}
+            if (node.HasChildNodes)
+            {
+                for (int i = 0; i < node.ChildNodes.Count; i++)
+                    Traverse(node.ChildNodes[i]);
+            }
+
+            if (node.NodeType == HtmlNodeType.Element)
+                contentHandler.EndElement(node);
+        }
 
         public TextDocument ToTextDocument()
         {
