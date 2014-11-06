@@ -33,7 +33,8 @@ namespace NBoilerpipe.Filters.Heuristics
             else
             {
                 title = title.Replace('\u00a0', ' ');
-                title = title.Trim();
+                title = title.Replace("'", string.Empty);
+                title = title.Trim().ToLowerInvariant();
                 if (title.Length == 0)
                 {
                     this.potentialTitles = null;
@@ -76,6 +77,9 @@ namespace NBoilerpipe.Filters.Heuristics
 
                     addPotentialTitles(potentialTitles, title, "[ ]+[\\|][ ]+", 4);
                     addPotentialTitles(potentialTitles, title, "[ ]+[\\-][ ]+", 4);
+
+                    potentialTitles.Add(Regex.Replace(title, " - [^\\-]+$", ""));
+                    potentialTitles.Add(Regex.Replace(title, "^[^\\-]+ - ", ""));
                 }
             }
         }
