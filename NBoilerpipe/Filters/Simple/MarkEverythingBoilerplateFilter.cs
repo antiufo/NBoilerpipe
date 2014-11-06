@@ -42,7 +42,7 @@ namespace NBoilerpipe.Filters.Simple
 
             var changes = false;
 
-            foreach (TextBlock tb in doc.getTextBlocks())
+            foreach (TextBlock tb in doc.GetTextBlocks())
             {
                 if (tb.IsContent())
                 {
