@@ -8,6 +8,7 @@ using NBoilerpipe;
 using NBoilerpipe.Document;
 using NBoilerpipe.Filters.Simple;
 using Sharpen;
+using NBoilerpipe.Labels;
 
 namespace NBoilerpipe.Filters.Simple
 {
@@ -19,7 +20,14 @@ namespace NBoilerpipe.Filters.Simple
     /// <author>Christian Kohlsch√ºtter</author>
     public sealed class BoilerplateBlockFilter : BoilerpipeFilter
     {
-        public static readonly BoilerplateBlockFilter INSTANCE = new BoilerplateBlockFilter();
+        public static readonly BoilerplateBlockFilter INSTANCE = new BoilerplateBlockFilter(null);
+        public static readonly BoilerplateBlockFilter INSTANCE_KEEP_TITLE = new BoilerplateBlockFilter(DefaultLabels.TITLE);
+        private string labelToKeep;
+
+        public BoilerplateBlockFilter(string labelToKeep)
+        {
+            this.labelToKeep = labelToKeep;
+        }
 
         /// <summary>Returns the singleton instance for BoilerplateBlockFilter.</summary>
         /// <remarks>Returns the singleton instance for BoilerplateBlockFilter.</remarks>
@@ -32,11 +40,14 @@ namespace NBoilerpipe.Filters.Simple
         public bool Process(TextDocument doc)
         {
             IList<TextBlock> textBlocks = doc.GetTextBlocks();
-            bool hasChanges = false;
+            var hasChanges = false;
+
             for (Iterator<TextBlock> it = textBlocks.Iterator(); it.HasNext(); )
             {
                 TextBlock tb = it.Next();
-                if (!tb.IsContent())
+                if (!tb.IsContent()
+                        && (labelToKeep == null || !tb
+                                .HasLabel(DefaultLabels.TITLE)))
                 {
                     it.Remove();
                     hasChanges = true;
