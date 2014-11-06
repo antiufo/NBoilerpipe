@@ -18,7 +18,7 @@ namespace NBoilerpipe.Labels
     /// .
     /// </summary>
     /// <author>Christian Kohlsch√ºtter</author>
-    public sealed class DefaultLabels
+    public static class DefaultLabels
     {
         public static readonly string TITLE = "de.l3s.boilerpipe/TITLE";
 
@@ -28,9 +28,18 @@ namespace NBoilerpipe.Labels
 
         public static readonly string MIGHT_BE_CONTENT = "de.l3s.boilerpipe/MIGHT_BE_CONTENT";
 
+        public static readonly string VERY_LIKELY_CONTENT = "de.l3s.boilerpipe/VERY_LIKELY_CONTENT";
+
         public static readonly string STRICTLY_NOT_CONTENT = "de.l3s.boilerpipe/STRICTLY_NOT_CONTENT";
 
         public static readonly string HR = "de.l3s.boilerpipe/HR";
+
+        public static readonly string LI = "de.l3s.boilerpipe/LI";
+
+        public static readonly string HEADING = "de.l3s.boilerpipe/HEADING";
+        public static readonly string H1 = "de.l3s.boilerpipe/H1";
+        public static readonly string H2 = "de.l3s.boilerpipe/H2";
+        public static readonly string H3 = "de.l3s.boilerpipe/H3";
 
         public static readonly string MARKUP_PREFIX = "<";
     }
