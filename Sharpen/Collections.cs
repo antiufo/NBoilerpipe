@@ -101,10 +101,10 @@ namespace Sharpen
 			return list;
 		}
 
-		public static IList<T> SynchronizedList<T> (IList<T> list)
-		{
-			return new Sharpen.SynchronizedList<T> (list);
-		}
+        //public static IList<T> SynchronizedList<T> (IList<T> list)
+        //{
+        //    return new Sharpen.SynchronizedList<T> (list);
+        //}
 
 		public static ICollection<T> UnmodifiableCollection<T> (ICollection<T> list)
 		{

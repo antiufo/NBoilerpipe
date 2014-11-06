@@ -185,7 +185,7 @@ namespace NBoilerpipe
 		public void FlushBlock ()
 		{
 			if (inBody == 0) {
-				if (inBody == 0 && Sharpen.Runtime.EqualsIgnoreCase ("TITLE", lastStartTag)) 
+				if (inBody == 0 && "TITLE".Equals(lastStartTag, StringComparison.OrdinalIgnoreCase)) 
 					SetTitle (tokenBuilder.ToString ().Trim ());
 				textBuilder.Length = 0;
 				tokenBuilder.Length = 0;

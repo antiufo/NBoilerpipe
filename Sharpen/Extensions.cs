@@ -215,17 +215,17 @@ namespace Sharpen
 			return (int)tzone.GetUtcOffset (MillisToDateTimeOffset (date, 0).DateTime).TotalMilliseconds;
 		}
 
-		public static InputStream GetResourceAsStream (this Type type, string name)
-		{
-			string str2 = type.Assembly.GetName ().Name;
-			string[] textArray1 = new string[] { str2, ".resources.", type.Namespace, ".", name };
-			string str = string.Concat (textArray1);
-			Stream manifestResourceStream = type.Assembly.GetManifestResourceStream (str);
-			if (manifestResourceStream == null) {
-				return null;
-			}
-			return InputStream.Wrap (manifestResourceStream);
-		}
+        //public static InputStream GetResourceAsStream (this Type type, string name)
+        //{
+        //    string str2 = type.Assembly.GetName ().Name;
+        //    string[] textArray1 = new string[] { str2, ".resources.", type.Namespace, ".", name };
+        //    string str = string.Concat (textArray1);
+        //    Stream manifestResourceStream = type.Assembly.GetManifestResourceStream (str);
+        //    if (manifestResourceStream == null) {
+        //        return null;
+        //    }
+        //    return InputStream.Wrap (manifestResourceStream);
+        //}
 
 		public static long GetTime (this DateTime dateTime)
 		{
@@ -334,15 +334,15 @@ namespace Sharpen
 			return new DateTimeOffset (num + offset.Ticks, offset);
 		}
 
-		public static CharsetDecoder NewDecoder (this Encoding enc)
-		{
-			return new CharsetDecoder (enc);
-		}
+        //public static CharsetDecoder NewDecoder (this Encoding enc)
+        //{
+        //    return new CharsetDecoder (enc);
+        //}
 
-		public static CharsetEncoder NewEncoder (this Encoding enc)
-		{
-			return new CharsetEncoder (enc);
-		}
+        //public static CharsetEncoder NewEncoder (this Encoding enc)
+        //{
+        //    return new CharsetEncoder (enc);
+        //}
 
 		public static int NumberOfLeadingZeros (int val)
 		{
@@ -662,10 +662,10 @@ namespace Sharpen
 			return string.IsNullOrEmpty (uri.Query) ? null : uri.Query;
 		}
 		
-		public static HttpURLConnection OpenConnection (this Uri uri, Proxy p)
-		{
-			return new HttpsURLConnection (uri, p);
-		}
+        //public static HttpURLConnection OpenConnection (this Uri uri, Proxy p)
+        //{
+        //    return new HttpsURLConnection (uri, p);
+        //}
 		
 		public static Uri ToURI (this Uri uri)
 		{
@@ -677,15 +677,15 @@ namespace Sharpen
 			return uri;
 		}
 		
-		public static InputStream GetInputStream (this Socket socket)
-		{
-			return new System.Net.Sockets.NetworkStream (socket);
-		}
+        //public static InputStream GetInputStream (this Socket socket)
+        //{
+        //    return new System.Net.Sockets.NetworkStream (socket);
+        //}
 		
-		public static OutputStream GetOutputStream (this Socket socket)
-		{
-			return new System.Net.Sockets.NetworkStream (socket);
-		}
+        //public static OutputStream GetOutputStream (this Socket socket)
+        //{
+        //    return new System.Net.Sockets.NetworkStream (socket);
+        //}
 		
 		public static int GetLocalPort (this Socket socket)
 		{
@@ -763,14 +763,14 @@ namespace Sharpen
 			si.Arguments = string.Join (" ", args.Skip (1).Select (a => "\"" + a + "\"").ToArray ());
 		}
 		
-		public static SystemProcess Start (this ProcessStartInfo si)
-		{
-			si.UseShellExecute = false;
-			si.RedirectStandardInput = true;
-			si.RedirectStandardError = true;
-			si.RedirectStandardOutput = true;
-			si.CreateNoWindow = true;
-			return SystemProcess.Start (si);
-		}
+        //public static SystemProcess Start (this ProcessStartInfo si)
+        //{
+        //    si.UseShellExecute = false;
+        //    si.RedirectStandardInput = true;
+        //    si.RedirectStandardError = true;
+        //    si.RedirectStandardOutput = true;
+        //    si.CreateNoWindow = true;
+        //    return SystemProcess.Start (si);
+        //}
 	}
 }
