@@ -23,3 +23,12 @@ profile
 #other 
 graph.dot
 
+Test/obj
+Test/bin
+NBoilerpipe/obj
+NBoilerpipe/bin
+Sharpen/obj
+Sharpen/bin
+
+*.suo
+
