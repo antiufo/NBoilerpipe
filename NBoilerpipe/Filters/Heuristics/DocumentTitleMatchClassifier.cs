@@ -43,27 +43,27 @@ namespace NBoilerpipe.Filters.Heuristics
                     this.potentialTitles = new HashSet<string>();
                     potentialTitles.AddItem(title);
                     string p;
-                    p = GetLongestPart(title, "[ ]*[\\|¬ª|:][ ]*");
+                    p = GetLongestPart(title, "[ ]*[\\|»|:][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
                     }
-                    p = GetLongestPart(title, "[ ]*[\\|¬ª|:\\(\\)][ ]*");
+                    p = GetLongestPart(title, "[ ]*[\\|»|:\\(\\)][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
                     }
-                    p = GetLongestPart(title, "[ ]*[\\|¬ª|:\\(\\)\\-][ ]*");
+                    p = GetLongestPart(title, "[ ]*[\\|»|:\\(\\)\\-][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
                     }
-                    p = GetLongestPart(title, "[ ]*[\\|¬ª|,|:\\(\\)\\-][ ]*");
+                    p = GetLongestPart(title, "[ ]*[\\|»|,|:\\(\\)\\-][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
                     }
-                    p = GetLongestPart(title, "[ ]*[\\|Â»|,|:\\(\\)\\-\u00a0][ ]*");
+                    p = GetLongestPart(title, "[ ]*[\\|»|,|:\\(\\)\\-\u00a0][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
