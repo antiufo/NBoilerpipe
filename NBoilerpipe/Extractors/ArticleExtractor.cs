@@ -42,10 +42,10 @@ namespace NBoilerpipe.Extractors
 				| new DocumentTitleMatchClassifier (doc.GetTitle ()).Process (doc) 
 				| NumWordsRulesClassifier.INSTANCE.Process (doc) 
 				| IgnoreBlocksAfterContentFilter.DEFAULT_INSTANCE.Process (doc) 
-				| BlockProximityFusion.MAX_DISTANCE_1.Process (doc) 
-				| BoilerplateBlockFilter.INSTANCE.Process (doc) 
-				| BlockProximityFusion.MAX_DISTANCE_1_CONTENT_ONLY.Process (doc) 
-				| KeepLargestBlockFilter.INSTANCE.Process (doc) 
+				| BlockProximityFusion.MAX_DISTANCE_1.Process (doc)
+                | BoilerplateBlockFilter.INSTANCE_KEEP_TITLE.Process(doc) 
+				| BlockProximityFusion.MAX_DISTANCE_1_CONTENT_ONLY.Process (doc)
+                | KeepLargestBlockFilter.INSTANCE_EXPAND_TO_SAME_TAGLEVEL.Process(doc) 
 				| ExpandTitleToContentFilter.INSTANCE.Process (doc);
 			
 			return ret;
