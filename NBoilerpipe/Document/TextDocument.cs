@@ -8,6 +8,7 @@ using System.Text;
 using NBoilerpipe.Document;
 using Sharpen;
 using System;
+using Sharper;
 
 namespace NBoilerpipe.Document
 {

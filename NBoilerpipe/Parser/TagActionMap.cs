@@ -16,7 +16,7 @@ namespace NBoilerpipe.Parser
     /// </summary>
     /// <seealso cref="DefaultTagActionMap">DefaultTagActionMap</seealso>
     /// <author>Christian Kohlsch√ºtter</author>
-    [System.Serializable]
+    //[System.Serializable]
     public abstract class TagActionMap : Dictionary<string, TagAction>
     {
         private const long serialVersionUID = 1L;

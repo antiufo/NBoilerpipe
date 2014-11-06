@@ -94,7 +94,7 @@ namespace NBoilerpipe.Parser
                     // as nested A elements are not allowed per specification, we
                     // are probably reaching this branch due to a bug in the XML
                     // parser
-                    System.Console.Error.WriteLine("Warning: SAX input contains nested A elements -- You have probably hit a bug in your HTML parser (e.g., NekoHTML bug #2909310). Please clean the HTML externally and feed it to boilerpipe again. Trying to recover somehow..."
+                    System.Diagnostics.Debug.WriteLine("Warning: SAX input contains nested A elements -- You have probably hit a bug in your HTML parser (e.g., NekoHTML bug #2909310). Please clean the HTML externally and feed it to boilerpipe again. Trying to recover somehow..."
                         );
                     this.End(instance, localName);
                 }

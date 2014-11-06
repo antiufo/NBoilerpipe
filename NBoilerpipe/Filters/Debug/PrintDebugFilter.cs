@@ -52,7 +52,7 @@ namespace NBoilerpipe.Filters.Debug
 
         public bool Process(TextDocument doc)
         {
-            Console.WriteLine(doc.DebugString());
+            System.Diagnostics.Debug.WriteLine(doc.DebugString());
             return false;
         }
     }

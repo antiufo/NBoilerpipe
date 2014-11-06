@@ -1,7 +1,6 @@
 using System.Reflection;
 using System.Net;
 using System.Linq;
-using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Specialized;
 
@@ -75,15 +74,15 @@ namespace Sharpen
 			return new IndexOutOfRangeException ("Index: " + index);
 		}
 
-		public static CultureInfo CreateLocale (string language, string country, string variant)
-		{
-			return CultureInfo.GetCultureInfo ("en-US");
-		}
+        //public static CultureInfo CreateLocale (string language, string country, string variant)
+        //{
+        //    return CultureInfo.GetCultureInfo ("en-US");
+        //}
 
-		public static string Name (this Encoding e)
-		{
-			return e.BodyName.ToUpper ();
-		}
+        //public static string Name (this Encoding e)
+        //{
+        //    return e.BodyName.ToUpper ();
+        //}
 		
 		public static string Decode (this Encoding e, byte[] chars, int start, int len)
 		{
@@ -175,35 +174,35 @@ namespace Sharpen
 				d[val.Key] = val.Value;
 		}
 
-		public static object Put (this Hashtable d, object key, object value)
-		{
-			object old = d [key];
-			d[key] = value;
-			return old;
-		}
+        //public static object Put (this Hashtable d, object key, object value)
+        //{
+        //    object old = d [key];
+        //    d[key] = value;
+        //    return old;
+        //}
 
-		public static string Put (this StringDictionary d, string key, string value)
-		{
-			string old = d [key];
-			d[key] = value;
-			return old;
-		}
+        //public static string Put (this StringDictionary d, string key, string value)
+        //{
+        //    string old = d [key];
+        //    d[key] = value;
+        //    return old;
+        //}
 
-		public static CultureInfo GetEnglishCulture ()
-		{
-			return CultureInfo.GetCultureInfo ("en-US");
-		}
+        //public static CultureInfo GetEnglishCulture ()
+        //{
+        //    return CultureInfo.GetCultureInfo ("en-US");
+        //}
 
 		public static T GetFirst<T> (this IList<T> list)
 		{
 			return ((list.Count == 0) ? default(T) : list[0]);
 		}
 
-		public static CultureInfo GetGermanCulture ()
-		{
-			CultureInfo r =  CultureInfo.GetCultureInfo ("de-DE");
-			return r;
-		}
+        //public static CultureInfo GetGermanCulture ()
+        //{
+        //    CultureInfo r =  CultureInfo.GetCultureInfo ("de-DE");
+        //    return r;
+        //}
 
 		public static T GetLast<T> (this IList<T> list)
 		{
@@ -232,34 +231,31 @@ namespace Sharpen
 			return new DateTimeOffset (DateTime.SpecifyKind (dateTime, DateTimeKind.Utc), TimeSpan.Zero).ToMillisecondsSinceEpoch ();
 		}
 
-		public static TimeZoneInfo GetTimeZone (string tzone)
-		{
-			try {
-				TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById (tzone);
-				return tz;
-			} catch {
-				// Not found
-			}
-			char[] separator = new char[] { ':' };
-			string[] strArray = tzone.Substring (4).Split (separator);
-			int hours, minutes;
-			if (strArray.Length == 1 && strArray[0].Length > 2) {
-				hours = int.Parse (strArray[0].Substring (0, 2));
-				minutes = int.Parse (strArray[0].Substring (2));
-			} else {
-				hours = int.Parse (strArray[0]);
-				minutes = (strArray.Length <= 1) ? 0 : int.Parse (strArray[1]);
-			}
-			TimeSpan t = new TimeSpan (0, hours, minutes, 0, 0);
-			if (tzone[3] == '-')
-				t = -t;
-			return TimeZoneInfo.CreateCustomTimeZone (tzone, t, tzone, tzone);
-		}
+        //public static TimeZoneInfo GetTimeZone (string tzone)
+        //{
+        //    try {
+        //        TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById (tzone);
+        //        return tz;
+        //    } catch {
+        //        // Not found
+        //    }
+        //    char[] separator = new char[] { ':' };
+        //    string[] strArray = tzone.Substring (4).Split (separator);
+        //    int hours, minutes;
+        //    if (strArray.Length == 1 && strArray[0].Length > 2) {
+        //        hours = int.Parse (strArray[0].Substring (0, 2));
+        //        minutes = int.Parse (strArray[0].Substring (2));
+        //    } else {
+        //        hours = int.Parse (strArray[0]);
+        //        minutes = (strArray.Length <= 1) ? 0 : int.Parse (strArray[1]);
+        //    }
+        //    TimeSpan t = new TimeSpan (0, hours, minutes, 0, 0);
+        //    if (tzone[3] == '-')
+        //        t = -t;
+        //    return TimeZoneInfo.CreateCustomTimeZone (tzone, t, tzone, tzone);
+        //}
 
-		public static void InitCause (this Exception ex, Exception cause)
-		{
-			Console.WriteLine (cause);
-		}
+
 		
 		public static bool IsEmpty<T> (this ICollection<T> col)
 		{
@@ -603,44 +599,44 @@ namespace Sharpen
 			return val;
 		}
 		
-		public static string GetTestName (object obj)
-		{
-			return GetTestName ();
-		}
+        //public static string GetTestName (object obj)
+        //{
+        //    return GetTestName ();
+        //}
 		
-		public static string GetTestName ()
-		{
-			MethodBase met;
-			int n = 0;
-			do {
-				met = new StackFrame (n).GetMethod ();
-				if (met != null) {
-					foreach (Attribute at in met.GetCustomAttributes (true)) {
-						if (at.GetType().FullName == "NUnit.Framework.TestAttribute") {
-							// Convert back to camel case
-							string name = met.Name;
-							if (char.IsUpper (name[0]))
-								name = char.ToLower (name[0]) + name.Substring (1);
-							return name;
-						}
-					}
-				}
-				n++;
-			} while (met != null);
-			return "";
-		}
+        //public static string GetTestName ()
+        //{
+        //    MethodBase met;
+        //    int n = 0;
+        //    do {
+        //        met = new StackFrame (n).GetMethod ();
+        //        if (met != null) {
+        //            foreach (Attribute at in met.GetCustomAttributes (true)) {
+        //                if (at.GetType().FullName == "NUnit.Framework.TestAttribute") {
+        //                    // Convert back to camel case
+        //                    string name = met.Name;
+        //                    if (char.IsUpper (name[0]))
+        //                        name = char.ToLower (name[0]) + name.Substring (1);
+        //                    return name;
+        //                }
+        //            }
+        //        }
+        //        n++;
+        //    } while (met != null);
+        //    return "";
+        //}
 		
-		public static string GetHostAddress (this IPAddress addr)
-		{
-			return addr.ToString ();
-		}
+        //public static string GetHostAddress (this IPAddress addr)
+        //{
+        //    return addr.ToString ();
+        //}
 		
-		public static IPAddress GetAddressByName (string name)
-		{
-			if (name == "0.0.0.0")
-				return IPAddress.Any;
-			return Dns.GetHostAddresses (name).FirstOrDefault ();
-		}
+        //public static IPAddress GetAddressByName (string name)
+        //{
+        //    if (name == "0.0.0.0")
+        //        return IPAddress.Any;
+        //    return Dns.GetHostAddresses (name).FirstOrDefault ();
+        //}
 		
 		public static string GetImplementationVersion (this System.Reflection.Assembly asm)
 		{
@@ -687,81 +683,81 @@ namespace Sharpen
         //    return new System.Net.Sockets.NetworkStream (socket);
         //}
 		
-		public static int GetLocalPort (this Socket socket)
-		{
-			return ((IPEndPoint)socket.LocalEndPoint).Port;
-		}
+        //public static int GetLocalPort (this Socket socket)
+        //{
+        //    return ((IPEndPoint)socket.LocalEndPoint).Port;
+        //}
 		
-		public static int GetPort (this Socket socket)
-		{
-			return ((IPEndPoint)socket.RemoteEndPoint).Port;
-		}
+        //public static int GetPort (this Socket socket)
+        //{
+        //    return ((IPEndPoint)socket.RemoteEndPoint).Port;
+        //}
 		
-		public static IPAddress GetInetAddress (this Socket socket)
-		{
-			return ((IPEndPoint)socket.RemoteEndPoint).Address;
-		}
+        //public static IPAddress GetInetAddress (this Socket socket)
+        //{
+        //    return ((IPEndPoint)socket.RemoteEndPoint).Address;
+        //}
 		
-		public static void Bind2 (this Socket socket, EndPoint ep)
-		{
-			if (ep == null)
-				socket.Bind (new IPEndPoint (IPAddress.Any, 0));
-			else
-				socket.Bind (ep);
-		}
+        //public static void Bind2 (this Socket socket, EndPoint ep)
+        //{
+        //    if (ep == null)
+        //        socket.Bind (new IPEndPoint (IPAddress.Any, 0));
+        //    else
+        //        socket.Bind (ep);
+        //}
 		
 		
-		public static void Connect (this Socket socket, EndPoint ep, int timeout)
-		{
-			try {
-				IAsyncResult res = socket.BeginConnect (ep,null, null);
-				if (!res.AsyncWaitHandle.WaitOne (timeout > 0 ? timeout : Timeout.Infinite, true))
-					throw new IOException ("Connection timeout");
-			} catch (SocketException se) {
-				throw new IOException (se.Message);
-			}
-		}
+        //public static void Connect (this Socket socket, EndPoint ep, int timeout)
+        //{
+        //    try {
+        //        IAsyncResult res = socket.BeginConnect (ep,null, null);
+        //        if (!res.AsyncWaitHandle.WaitOne (timeout > 0 ? timeout : Timeout.Infinite, true))
+        //            throw new IOException ("Connection timeout");
+        //    } catch (SocketException se) {
+        //        throw new IOException (se.Message);
+        //    }
+        //}
 		
-		public static Socket CreateServerSocket (int port, int backlog, IPAddress addr)
-		{
-			Socket s = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-			s.Bind (new IPEndPoint (addr, port));
-			return s;
-		}
+        //public static Socket CreateServerSocket (int port, int backlog, IPAddress addr)
+        //{
+        //    Socket s = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //    s.Bind (new IPEndPoint (addr, port));
+        //    return s;
+        //}
 		
-		public static Socket CreateSocket (string host, int port)
-		{
-			Socket s = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-			s.Connect (host, port);
-			return s;
-		}
+        //public static Socket CreateSocket (string host, int port)
+        //{
+        //    Socket s = new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //    s.Connect (host, port);
+        //    return s;
+        //}
 		
-		public static Socket CreateSocket ()
-		{
-			return new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-		}
+        //public static Socket CreateSocket ()
+        //{
+        //    return new Socket (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //}
 		
-		public static bool RemoveElement (this ArrayList list, object elem)
-		{
-			int i = list.IndexOf (elem);
-			if (i == -1)
-				return false;
-			else {
-				list.RemoveAt (i);
-				return true;
-			}
-		}
+        //public static bool RemoveElement (this ArrayList list, object elem)
+        //{
+        //    int i = list.IndexOf (elem);
+        //    if (i == -1)
+        //        return false;
+        //    else {
+        //        list.RemoveAt (i);
+        //        return true;
+        //    }
+        //}
 		
-		public static System.Threading.Semaphore CreateSemaphore (int count)
-		{
-			return new System.Threading.Semaphore (count, int.MaxValue);
-		}
+        //public static System.Threading.Semaphore CreateSemaphore (int count)
+        //{
+        //    return new System.Threading.Semaphore (count, int.MaxValue);
+        //}
 		
-		public static void SetCommand (this ProcessStartInfo si, IList<string> args)
-		{
-			si.FileName = args[0];
-			si.Arguments = string.Join (" ", args.Skip (1).Select (a => "\"" + a + "\"").ToArray ());
-		}
+        //public static void SetCommand (this ProcessStartInfo si, IList<string> args)
+        //{
+        //    si.FileName = args[0];
+        //    si.Arguments = string.Join (" ", args.Skip (1).Select (a => "\"" + a + "\"").ToArray ());
+        //}
 		
         //public static SystemProcess Start (this ProcessStartInfo si)
         //{

@@ -14,7 +14,7 @@ namespace NBoilerpipe.Parser
     /// s. Seem to work well.
     /// </summary>
     /// <seealso cref="TagActionMap">TagActionMap</seealso>
-    [System.Serializable]
+    //[System.Serializable]
     public class DefaultTagActionMap : TagActionMap
     {
         private const long serialVersionUID = 1L;

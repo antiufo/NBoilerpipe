@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Text;
 using Sharpen;
 using Shaman.Dom;
+using NBoilerpipe.Document;
+using Sharper;
 
 namespace NBoilerpipe.Document
 {

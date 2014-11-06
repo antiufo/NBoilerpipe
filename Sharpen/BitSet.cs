@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sharper;
+using System;
 using System.Collections;
 
 namespace Sharpen
@@ -118,16 +119,12 @@ namespace Sharpen
         public virtual object Clone()
         {
             BitSet s;
-            try
-            {
-                s = new BitSet();
-                s.dataBits = new long[dataBits.Length];
-                Array.Copy(dataBits, 0, s.dataBits, 0, dataBits.Length);
-            }
-            catch //(System.Exception e)
-            {
-                throw new System.ApplicationException();
-            }
+            
+
+            s = new BitSet();
+            s.dataBits = new long[dataBits.Length];
+            Array.Copy(dataBits, 0, s.dataBits, 0, dataBits.Length);
+
             return s;
         }
 
@@ -406,37 +403,37 @@ namespace Sharpen
          * @separator The string to put in between elements
          * @return A commma-separated list of character constants.
          */
-        public virtual string ToString(string separator, ArrayList vocabulary)
-        {
-            if (vocabulary == null)
-            {
-                return ToString(separator);
-            }
-            string str = "";
-            for (int i = 0; i < (dataBits.Length << LOG_BITS); i++)
-            {
-                if (Member(i))
-                {
-                    if (str.Length > 0)
-                    {
-                        str += separator;
-                    }
-                    if (i >= vocabulary.Count)
-                    {
-                        str += "<bad element " + i + ">";
-                    }
-                    else if (vocabulary[i] == null)
-                    {
-                        str += "<" + i + ">";
-                    }
-                    else
-                    {
-                        str += (string)vocabulary[i];
-                    }
-                }
-            }
-            return str;
-        }
+        //public virtual string ToString(string separator, ArrayList vocabulary)
+        //{
+        //    if (vocabulary == null)
+        //    {
+        //        return ToString(separator);
+        //    }
+        //    string str = "";
+        //    for (int i = 0; i < (dataBits.Length << LOG_BITS); i++)
+        //    {
+        //        if (Member(i))
+        //        {
+        //            if (str.Length > 0)
+        //            {
+        //                str += separator;
+        //            }
+        //            if (i >= vocabulary.Count)
+        //            {
+        //                str += "<bad element " + i + ">";
+        //            }
+        //            else if (vocabulary[i] == null)
+        //            {
+        //                str += "<" + i + ">";
+        //            }
+        //            else
+        //            {
+        //                str += (string)vocabulary[i];
+        //            }
+        //        }
+        //    }
+        //    return str;
+        //}
 
         /*
          * Dump a comma-separated list of the words making up the bit set.
