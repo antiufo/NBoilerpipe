@@ -56,7 +56,7 @@ namespace NBoilerpipe.Filters.English
                              textLC.StartsWith("post a comment") || textLC.Contains("what you think...") ||
                             textLC.Contains("add your comment") || textLC.Contains("add comment") || textLC.
                             Contains("reader views") || textLC.Contains("have your say") || textLC.Contains(
-                            "reader comments") || textLC.Contains("r√§tta artikeln") || textLC.Equals("thanks for your comments - this feedback is now closed"
+                            "reader comments") || textLC.Contains("rätta artikeln") || textLC.Equals("thanks for your comments - this feedback is now closed"
                             ))
                         {
                             tb.AddLabel(DefaultLabels.INDICATES_END_OF_TEXT);
