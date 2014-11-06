@@ -60,6 +60,7 @@
     <Compile Include="Extractors\KeepEverythingWithMinKWordsExtractor.cs" />
     <Compile Include="Extractors\LargestContentExtractor.cs" />
     <Compile Include="Extractors\NumWordsRulesExtractor.cs" />
+    <Compile Include="Filters\Debug\PrintDebugFilter.cs" />
     <Compile Include="Filters\English\DensityRulesClassifier.cs" />
     <Compile Include="Filters\English\HeuristicFilterBase.cs" />
     <Compile Include="Filters\English\IgnoreBlocksAfterContentFilter.cs" />
