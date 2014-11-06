@@ -102,7 +102,7 @@ namespace NBoilerpipe
             if (IsTag(node.Text))
                 node.Text = "";
 
-            char[] ch = HttpUtility.HtmlDecode(node.Text).ToCharArray();
+            char[] ch = node.Text.ToCharArray();
             int start = 0;
             int length = ch.Length;
 

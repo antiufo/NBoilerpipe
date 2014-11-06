@@ -150,7 +150,6 @@
     <Compile Include="Parser\MarkupTagAction.cs" />
     <Compile Include="Parser\TagAction.cs" />
     <Compile Include="Parser\TagActionMap.cs" />
-    <Compile Include="Util\HttpUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
