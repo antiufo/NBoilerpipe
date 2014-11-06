@@ -109,20 +109,20 @@ namespace Sharpen
 			}
 		}
 		
-		public static string Decode (this Encoding e, ByteBuffer buffer)
-		{
-			return e.Decode (buffer.Array (), buffer.ArrayOffset () + buffer.Position (), buffer.Limit () - buffer.Position ());
-		}
+        //public static string Decode (this Encoding e, ByteBuffer buffer)
+        //{
+        //    return e.Decode (buffer.Array (), buffer.ArrayOffset () + buffer.Position (), buffer.Limit () - buffer.Position ());
+        //}
 
-		public static ByteBuffer Encode (this Encoding e, CharSequence str)
-		{
-			return ByteBuffer.Wrap (e.GetBytes (str.ToString ()));
-		}
+        //public static ByteBuffer Encode (this Encoding e, CharSequence str)
+        //{
+        //    return ByteBuffer.Wrap (e.GetBytes (str.ToString ()));
+        //}
 
-		public static ByteBuffer Encode (this Encoding e, string str)
-		{
-			return ByteBuffer.Wrap (e.GetBytes (str));
-		}
+        //public static ByteBuffer Encode (this Encoding e, string str)
+        //{
+        //    return ByteBuffer.Wrap (e.GetBytes (str));
+        //}
 		
 		public static Encoding GetEncoding (string name)
 		{
