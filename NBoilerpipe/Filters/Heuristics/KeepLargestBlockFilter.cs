@@ -26,16 +26,21 @@ namespace NBoilerpipe.Filters.Heuristics
     public sealed class KeepLargestBlockFilter : BoilerpipeFilter
     {
         public static readonly NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter INSTANCE
-             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(false);
+             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(false, 0);
 
         public static readonly NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter INSTANCE_EXPAND_TO_SAME_TAGLEVEL
-             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true);
+             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true, 0);
 
+        public static readonly NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter INSTANCE_EXPAND_TO_SAME_TAGLEVEL_MIN_WORDS
+             = new NBoilerpipe.Filters.Heuristics.KeepLargestBlockFilter(true, 10);
         private readonly bool expandToSameLevelText;
+        private readonly int minWords;
 
-        public KeepLargestBlockFilter(bool expandToSameLevelText)
+
+        public KeepLargestBlockFilter(bool expandToSameLevelText, int minWords)
         {
             this.expandToSameLevelText = expandToSameLevelText;
+            this.minWords = minWords;
         }
 
         /// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
@@ -95,7 +100,8 @@ namespace NBoilerpipe.Filters.Heuristics
                     {
                         if (tl == level)
                         {
-                            tb_2.SetIsContent(true);
+                            if (tb_2.GetNumWords() >= minWords)
+                                tb_2.SetIsContent(true);
                         }
                     }
                 }
@@ -111,7 +117,8 @@ namespace NBoilerpipe.Filters.Heuristics
                     {
                         if (tl == level)
                         {
-                            tb_2.SetIsContent(true);
+                            if (tb_2.GetNumWords() >= minWords)
+                                tb_2.SetIsContent(true);
                         }
                     }
                 }
