@@ -79,6 +79,7 @@ namespace NBoilerpipe.Filters.Heuristics
                 if (tb_1 == largestBlock)
                 {
                     tb_1.SetIsContent(true);
+                    tb_1.AddLabel(DefaultLabels.VERY_LIKELY_CONTENT);
                 }
                 else
                 {
