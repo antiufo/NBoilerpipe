@@ -8,6 +8,7 @@ using NBoilerpipe;
 using NBoilerpipe.Document;
 using NBoilerpipe.Labels;
 using Sharpen;
+using System.Text.RegularExpressions;
 
 namespace NBoilerpipe.Filters.Heuristics
 {
@@ -18,7 +19,7 @@ namespace NBoilerpipe.Filters.Heuristics
     /// <code>&lt;TITLE&gt;</code> tag, using some heuristics which are quite
     /// specific to the news domain.
     /// </summary>
-    /// <author>Christian Kohlsch√ºtter</author>
+    /// <author>Christian Kohlschvºtter</author>
     public sealed class DocumentTitleMatchClassifier : BoilerpipeFilter
     {
         private readonly ICollection<string> potentialTitles;
@@ -31,6 +32,7 @@ namespace NBoilerpipe.Filters.Heuristics
             }
             else
             {
+                title = title.Replace('\u00a0', ' ');
                 title = title.Trim();
                 if (title.Length == 0)
                 {
@@ -57,6 +59,11 @@ namespace NBoilerpipe.Filters.Heuristics
                         potentialTitles.AddItem(p);
                     }
                     p = GetLongestPart(title, "[ ]*[\\|¬ª|,|:\\(\\)\\-][ ]*");
+                    if (p != null)
+                    {
+                        potentialTitles.AddItem(p);
+                    }
+                    p = GetLongestPart(title, "[ ]*[\\|Â»|,|:\\(\\)\\-\u00a0][ ]*");
                     if (p != null)
                     {
                         potentialTitles.AddItem(p);
@@ -103,6 +110,10 @@ namespace NBoilerpipe.Filters.Heuristics
             }
         }
 
+
+        private static Regex PAT_REMOVE_CHARACTERS = new Regex("[\\?\\!\\.\\-\\:]+");
+
+
         /// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
         public bool Process(TextDocument doc)
         {
@@ -111,16 +122,27 @@ namespace NBoilerpipe.Filters.Heuristics
                 return false;
             }
             bool changes = false;
+
             foreach (TextBlock tb in doc.GetTextBlocks())
             {
-                string text = tb.GetText().Trim();
-                foreach (string candidate in potentialTitles)
+                var text = tb.GetText();
+
+                text = text.Replace('\u00a0', ' ');
+                text = text.Trim();
+
+                if (potentialTitles.Contains(text))
                 {
-                    if (candidate.Equals(text))
-                    {
-                        tb.AddLabel(DefaultLabels.TITLE);
-                        changes = true;
-                    }
+                    tb.AddLabel(DefaultLabels.TITLE);
+                    changes = true;
+                    break;
+                }
+
+                text = PAT_REMOVE_CHARACTERS.Replace(text, string.Empty).Trim();
+                if (potentialTitles.Contains(text))
+                {
+                    tb.AddLabel(DefaultLabels.TITLE);
+                    changes = true;
+                    break;
                 }
             }
             return changes;
