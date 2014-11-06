@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using NBoilerpipe.Document;
 using Sharpen;
+using System;
 
 namespace NBoilerpipe.Document
 {
@@ -16,7 +17,7 @@ namespace NBoilerpipe.Document
     /// s.
     /// </summary>
     /// <author>Christian Kohlsch√ºtter</author>
-    public class TextDocument
+    public class TextDocument : ICloneable
     {
         internal readonly IList<TextBlock> textBlocks;
 
@@ -145,6 +146,16 @@ namespace NBoilerpipe.Document
                 sb.Append('\n');
             }
             return sb.ToString();
+        }
+
+        public object Clone()
+        {
+            var list = new List<TextBlock>(textBlocks.Count);
+            foreach (TextBlock tb in textBlocks)
+            {
+                list.Add((TextBlock)tb.Clone());
+            }
+            return new TextDocument(title, list);
         }
     }
 }
