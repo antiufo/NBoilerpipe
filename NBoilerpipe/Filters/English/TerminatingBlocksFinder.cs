@@ -52,7 +52,7 @@ namespace NBoilerpipe.Filters.English
                     {
                         string textLC = text.ToLower();
                         if (textLC.StartsWith("comments") || StartsWithNumber(textLC, len, " comments", " users responded in"
-                            ) || textLC.StartsWith("¬© reuters") || textLC.StartsWith("please rate this") ||
+                            ) || textLC.StartsWith("© reuters") || textLC.StartsWith("please rate this") ||
                              textLC.StartsWith("post a comment") || textLC.Contains("what you think...") ||
                             textLC.Contains("add your comment") || textLC.Contains("add comment") || textLC.
                             Contains("reader views") || textLC.Contains("have your say") || textLC.Contains(
