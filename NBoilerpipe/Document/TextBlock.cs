@@ -38,7 +38,7 @@ namespace NBoilerpipe.Document
         int tagLevel;
         static readonly BitSet EMPTY_BITSET = new BitSet();
 
-        public readonly HtmlNode Node;
+        public HtmlNode Node;
 
         public static readonly NBoilerpipe.Document.TextBlock EMPTY_START = new NBoilerpipe.Document.TextBlock
             (string.Empty, EMPTY_BITSET, 0, 0, 0, 0, -1, null);
@@ -145,6 +145,7 @@ namespace NBoilerpipe.Document
                 }
             }
             tagLevel = Math.Min(tagLevel, other.tagLevel);
+            Node = NBoilerpipeContentHandler.GetCommonAncestor(Node, other.Node);
         }
 
         private void InitDensities()
