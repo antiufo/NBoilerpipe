@@ -111,11 +111,7 @@ namespace NBoilerpipe.Document
 
         public virtual void MergeNext(NBoilerpipe.Document.TextBlock other)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(text);
-            sb.Append('\n');
-            sb.Append(other.text);
-            this.text = sb.ToString();
+            this.text = text + "\n" + other.text;
             numWords += other.numWords;
             numWordsInAnchorText += other.numWordsInAnchorText;
             numWordsInWrappedLines += other.numWordsInWrappedLines;
