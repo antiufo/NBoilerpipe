@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using NBoilerpipe;
 using NBoilerpipe.Document;
 using Sharpen;
+using System;
 
 namespace NBoilerpipe.Filters.Heuristics
 {
@@ -22,20 +23,25 @@ namespace NBoilerpipe.Filters.Heuristics
         private readonly int maxBlocksDistance;
 
         public static readonly NBoilerpipe.Filters.Heuristics.BlockProximityFusion MAX_DISTANCE_1
-             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, false, false);
+             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, false, int.MaxValue);
+
+        public static readonly NBoilerpipe.Filters.Heuristics.BlockProximityFusion MAX_DISTANCE_1_NEAR_TAGLEVEL
+             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, false, 1);
 
         public static readonly NBoilerpipe.Filters.Heuristics.BlockProximityFusion MAX_DISTANCE_1_SAME_TAGLEVEL
-             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, false, true);
+             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, false, 0);
 
         public static readonly NBoilerpipe.Filters.Heuristics.BlockProximityFusion MAX_DISTANCE_1_CONTENT_ONLY
-             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, true, false);
+             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, true, int.MaxValue);
 
         public static readonly NBoilerpipe.Filters.Heuristics.BlockProximityFusion MAX_DISTANCE_1_CONTENT_ONLY_SAME_TAGLEVEL
-             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, true, true);
+             = new NBoilerpipe.Filters.Heuristics.BlockProximityFusion(1, true, 0);
 
         private readonly bool contentOnly;
 
-        private readonly bool sameTagLevelOnly;
+        private readonly int maxTagLevelDistance;
+        private string[] AllowMismatchingLevelMergeTagNames = new[] { "p", "pre", "blockquote", "i", "ul", "li", "b", "strong" };
+
 
         /// <summary>
         /// Creates a new
@@ -44,12 +50,12 @@ namespace NBoilerpipe.Filters.Heuristics
         /// </summary>
         /// <param name="maxBlocksDistance">The maximum distance in blocks.</param>
         /// <param name="contentOnly"></param>
-        public BlockProximityFusion(int maxBlocksDistance, bool contentOnly, bool sameTagLevelOnly
+        public BlockProximityFusion(int maxBlocksDistance, bool contentOnly, int maxTagLevelDistance
             )
         {
             this.maxBlocksDistance = maxBlocksDistance;
             this.contentOnly = contentOnly;
-            this.sameTagLevelOnly = sameTagLevelOnly;
+            this.maxTagLevelDistance = maxTagLevelDistance;
         }
 
         /// <exception cref="NBoilerpipe.BoilerpipeProcessingException"></exception>
@@ -86,7 +92,7 @@ namespace NBoilerpipe.Filters.Heuristics
                 prevBlock = textBlocks[0];
                 offset = 1;
             }
-            for (ListIterator<TextBlock> it = textBlocks.ListIterator<TextBlock>(offset); it.HasNext(); )
+            for (ListIterator<TextBlock> it = textBlocks.ListIterator<TextBlock>(offset); it.HasNext();)
             {
                 TextBlock block = it.Next();
                 if (!block.IsContent())
@@ -105,9 +111,17 @@ namespace NBoilerpipe.Filters.Heuristics
                             ok = false;
                         }
                     }
-                    if (ok && sameTagLevelOnly && prevBlock.GetTagLevel() != block.GetTagLevel())
+                    if (ok && maxTagLevelDistance != int.MaxValue)
                     {
-                        ok = false;
+                        var level1 = prevBlock.GetTagLevel();
+                        var level2 = block.GetTagLevel();
+                        if (level1 != level2)
+                        {
+                            var deepest = level1 > level2 ? prevBlock : block;
+                            var deepestName = deepest.Node.TagName;
+                            if (!AllowMismatchingLevelMergeTagNames.Contains(deepestName) || Math.Abs(level1 - level2) > maxTagLevelDistance)
+                                ok = false;
+                        }
                     }
                     if (ok)
                     {

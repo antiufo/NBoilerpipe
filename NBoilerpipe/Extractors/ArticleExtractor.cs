@@ -42,7 +42,7 @@ namespace NBoilerpipe.Extractors
                 | NumWordsRulesClassifier.INSTANCE.Process(doc)
                 | IgnoreBlocksAfterContentFilter.DEFAULT_INSTANCE.Process(doc)
                 | TrailingHeadlineToBoilerplateFilter.INSTANCE.Process(doc)
-                | BlockProximityFusion.MAX_DISTANCE_1.Process(doc)
+                | BlockProximityFusion.MAX_DISTANCE_1_NEAR_TAGLEVEL.Process(doc)
                 | BoilerplateBlockFilter.INSTANCE_KEEP_TITLE.Process(doc)
                 | BlockProximityFusion.MAX_DISTANCE_1_CONTENT_ONLY_SAME_TAGLEVEL.Process(doc)
                 | KeepLargestBlockFilter.INSTANCE_EXPAND_TO_SAME_TAGLEVEL_MIN_WORDS.Process(doc)
