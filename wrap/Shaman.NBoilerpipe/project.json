@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-beta-4776",
+  "version": "1.0.0-beta-4778",
   "frameworks": {
     "net45+win+wpa81": {
       "wrappedProject": "../../NBoilerpipe/NBoilerpipe.csproj",

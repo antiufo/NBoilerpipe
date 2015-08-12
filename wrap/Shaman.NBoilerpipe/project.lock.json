@@ -10,6 +10,17 @@
         "runtime": {
           "lib/portable-net45+win+wpa81/Shaman.Dom.dll": {}
         }
+      },
+      "Shaman.NBoilerpipe/1.0.0-beta-4776": {
+        "dependencies": {
+          "Shaman.Dom": "1.0.0-beta-2509"
+        },
+        "compile": {
+          "lib/portable-net45+win+wpa81/NBoilerpipe.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81/NBoilerpipe.dll": {}
+        }
       }
     }
   },
@@ -23,6 +34,17 @@
         "Shaman.Dom.1.0.0-beta-2509.nupkg",
         "Shaman.Dom.1.0.0-beta-2509.nupkg.sha512",
         "Shaman.Dom.nuspec"
+      ]
+    },
+    "Shaman.NBoilerpipe/1.0.0-beta-4776": {
+      "sha512": "NMJ7MPGnZcOq5KqKsaUfNhcSosUUYfTqc/3MqdObFhQjhgFhpACp8UDKD2olJjNBFZdH3wZq9ddrbs0GlCpWsg==",
+      "files": [
+        "GitRepositoryRevParse.txt",
+        "GitRepositoryStatus.txt",
+        "lib/portable-net45+win+wpa81/NBoilerpipe.dll",
+        "Shaman.NBoilerpipe.1.0.0-beta-4776.nupkg",
+        "Shaman.NBoilerpipe.1.0.0-beta-4776.nupkg.sha512",
+        "Shaman.NBoilerpipe.nuspec"
       ]
     }
   },

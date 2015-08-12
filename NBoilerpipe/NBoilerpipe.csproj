@@ -33,6 +33,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Folder Include="Properties\" />
@@ -46,8 +52,8 @@
   </Target>
   -->
   <ItemGroup>
-    <Reference Include="Shaman.Dom, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Shaman.Dom.1.0.0-beta-2509\lib\portable-net45+win+wpa81\Shaman.Dom.dll</HintPath>
+    <Reference Include="Shaman.Dom, Version=0.0.0.0, Culture=neutral, PublicKeyToken=18bc04d2eb1e1518, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shaman.Dom.1.0.0-beta-2510\lib\portable-net45+win+wpa81\Shaman.Dom.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -166,6 +172,7 @@
     <Compile Include="Parser\TagActionMap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
 </Project>
