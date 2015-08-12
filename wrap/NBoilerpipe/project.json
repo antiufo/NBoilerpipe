@@ -1,0 +1,15 @@
+﻿{
+  "version": "1.0.0-beta-4775.1",
+  "frameworks": {
+    "net45+win+wpa81": {
+      "wrappedProject": "../../NBoilerpipe/NBoilerpipe.csproj",
+      "bin": {
+        "assembly": "../../NBoilerpipe/obj/{configuration}/NBoilerpipe.dll",
+        "pdb": "../../NBoilerpipe/obj/{configuration}/NBoilerpipe.pdb"
+      },
+      "dependencies": {
+        "Shaman.Dom": "1.0.0-beta-2509"
+      }
+    }
+  }
+}
