@@ -226,7 +226,7 @@ namespace NBoilerpipe
             if (inBody == 0)
             {
                 if (inBody == 0 && "TITLE".Equals(lastStartTag, StringComparison.OrdinalIgnoreCase))
-                    SetTitle(tokenBuilder.ToString().Trim());
+                    SetTitle(textBuilder.ToString().Trim());
                 textBuilder.Length = 0;
                 tokenBuilder.Clear();
                 return;
@@ -237,7 +237,7 @@ namespace NBoilerpipe
             {
                 return;
             }
-            else if (length == 1)
+            else if (length == 1 && tokenBuilder[0].Length == 1)
             {
                 if (sbLastWasWhitespace)
                 {
@@ -255,8 +255,7 @@ namespace NBoilerpipe
             int maxLineLength = 80;
             int numTokens = 0;
             int numWordsCurrentLine = 0;
-
-            foreach (ValueString token in tokenBuilder)
+            foreach (ValueString token in GetWords(tokenBuilder))
             {
                 if (token == ANCHOR_TEXT_START)
                 {
@@ -322,49 +321,56 @@ namespace NBoilerpipe
             blockTagLevel = -1;
         }
 
-        public static IEnumerable<ValueString> GetWords(string str)
+        public static IEnumerable<ValueString> GetWords(List<ValueString> strings)
         {
-
-            var currentWordStart = 0;
-            var currentWordLength = 0;
-            bool prevCharWasSep = true;
-            for (int i = 0; i < str.Length; i++)
+            foreach (var str in strings)
             {
-                bool curCharIsSep;
-                char c = str[i];
-
-                if (char.IsLetterOrDigit(c) || CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark)
-
+                if (str == ANCHOR_TEXT_START || str == ANCHOR_TEXT_END)
                 {
-                    if (prevCharWasSep)
-                    {
-                        currentWordLength = 0;
-                        prevCharWasSep = false;
-                    }
-                    if (currentWordLength == 0) currentWordStart = i;
-                    currentWordLength++;
-
-                    curCharIsSep = CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.OtherLetter;
+                    yield return str;
+                    continue;
                 }
-                else
+
+                var currentWordStart = 0;
+                var currentWordLength = 0;
+                bool prevCharWasSep = true;
+                for (int i = 0; i < str.Length; i++)
                 {
-                    curCharIsSep = true;
-                }
-                if (curCharIsSep)
-                {
-                    if (currentWordLength != 0)
+                    bool curCharIsSep;
+                    char c = str[i];
+
+                    if (char.IsLetterOrDigit(c) || CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark)
+
                     {
-                        yield return new ValueString(str, currentWordStart, currentWordLength);
-                        currentWordLength = 0;
+                        if (prevCharWasSep)
+                        {
+                            currentWordLength = 0;
+                            prevCharWasSep = false;
+                        }
+                        if (currentWordLength == 0) currentWordStart = i;
+                        currentWordLength++;
+
+                        curCharIsSep = CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.OtherLetter;
                     }
-                    prevCharWasSep = true;
+                    else
+                    {
+                        curCharIsSep = true;
+                    }
+                    if (curCharIsSep)
+                    {
+                        if (currentWordLength != 0)
+                        {
+                            yield return str.Substring(currentWordStart, currentWordLength);
+                            currentWordLength = 0;
+                        }
+                        prevCharWasSep = true;
+                    }
+                }
+                if (currentWordLength != 0)
+                {
+                    yield return str.Substring(currentWordStart, currentWordLength);
                 }
             }
-            if (currentWordLength != 0)
-            {
-                yield return new ValueString(str, currentWordStart, currentWordLength);
-            }
-
         }
 
 
