@@ -23,7 +23,7 @@ namespace Sharpen
 		static Extensions ()
 		{
 			DateTime time = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-			EPOCH_TICKS = time.Ticks;
+	    	EPOCH_TICKS = time.Ticks;
 		}
 		
 		public static void Add<T> (this IList<T> list, int index, T item)
@@ -31,48 +31,48 @@ namespace Sharpen
 			list.Insert (index, item);
 		}
 
-		public static StringBuilder AppendRange (this StringBuilder sb, string str, int start, int end)
-		{
-			return sb.Append (str, start, end - start);
-		}
+		//public static StringBuilder AppendRange (this StringBuilder sb, string str, int start, int end)
+		//{
+		//	return sb.Append (str, start, end - start);
+		//}
 
-		public static StringBuilder Delete (this StringBuilder sb, int start, int end)
-		{
-			return sb.Remove (start, end - start);
-		}
+		//public static StringBuilder Delete (this StringBuilder sb, int start, int end)
+		//{
+		//	return sb.Remove (start, end - start);
+		//}
 
-		public static void SetCharAt (this StringBuilder sb, int index, char c)
-		{
-			sb[index] = c;
-		}
+		//public static void SetCharAt (this StringBuilder sb, int index, char c)
+		//{
+		//	sb[index] = c;
+		//}
 
-		public static int IndexOf (this StringBuilder sb, string str)
-		{
-			return sb.ToString ().IndexOf (str);
-		}
+		//public static int IndexOf (this StringBuilder sb, string str)
+		//{
+		//	return sb.ToString ().IndexOf (str);
+		//}
 
-		public static Iterable<T> AsIterable<T> (this IEnumerable<T> s)
-		{
-			return new EnumerableWrapper<T> (s);
-		}
+		//public static Iterable<T> AsIterable<T> (this IEnumerable<T> s)
+		//{
+		//	return new EnumerableWrapper<T> (s);
+		//}
 
-		public static int BitCount (int val)
-		{
-			uint num = (uint)val;
-			int count = 0;
-			for (int i = 0; i < 32; i++) {
-				if ((num & 1) != 0) {
-					count++;
-				}
-				num >>= 1;
-			}
-			return count;
-		}
+		//public static int BitCount (int val)
+		//{
+		//	uint num = (uint)val;
+		//	int count = 0;
+		//	for (int i = 0; i < 32; i++) {
+		//		if ((num & 1) != 0) {
+		//			count++;
+		//		}
+		//		num >>= 1;
+		//	}
+		//	return count;
+		//}
 
-		public static IndexOutOfRangeException CreateIndexOutOfRangeException (int index)
-		{
-			return new IndexOutOfRangeException ("Index: " + index);
-		}
+		//public static IndexOutOfRangeException CreateIndexOutOfRangeException (int index)
+		//{
+		//	return new IndexOutOfRangeException ("Index: " + index);
+		//}
 
         //public static CultureInfo CreateLocale (string language, string country, string variant)
         //{
@@ -84,29 +84,29 @@ namespace Sharpen
         //    return e.BodyName.ToUpper ();
         //}
 		
-		public static string Decode (this Encoding e, byte[] chars, int start, int len)
-		{
-			try {
-				byte[] bom = e.GetPreamble ();
-				if (bom != null && bom.Length > 0) {
-					if (len >= bom.Length) {
-						int pos = start;
-						bool hasBom = true;
-						for (int n=0; n<bom.Length && hasBom; n++) {
-							if (bom[n] != chars [pos++])
-								hasBom = false;
-						}
-						if (hasBom) {
-							len -= pos - start;
-							start = pos;
-						}
-					}
-				}
-				return e.GetString (chars, start, len);
-			} catch (DecoderFallbackException) {
-				throw new CharacterCodingException ();
-			}
-		}
+		//public static string Decode (this Encoding e, byte[] chars, int start, int len)
+		//{
+		//	try {
+		//		byte[] bom = e.GetPreamble ();
+		//		if (bom != null && bom.Length > 0) {
+		//			if (len >= bom.Length) {
+		//				int pos = start;
+		//				bool hasBom = true;
+		//				for (int n=0; n<bom.Length && hasBom; n++) {
+		//					if (bom[n] != chars [pos++])
+		//						hasBom = false;
+		//				}
+		//				if (hasBom) {
+		//					len -= pos - start;
+		//					start = pos;
+		//				}
+		//			}
+		//		}
+		//		return e.GetString (chars, start, len);
+		//	} catch (DecoderFallbackException) {
+		//		throw new CharacterCodingException ();
+		//	}
+		//}
 		
         //public static string Decode (this Encoding e, ByteBuffer buffer)
         //{
@@ -123,23 +123,23 @@ namespace Sharpen
         //    return ByteBuffer.Wrap (e.GetBytes (str));
         //}
 		
-		public static Encoding GetEncoding (string name)
-		{
-//			Encoding e = Encoding.GetEncoding (name, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
-			try {
-				Encoding e = Encoding.GetEncoding (name.Replace ('_','-'));
-				if (e is UTF8Encoding)
-					return new UTF8Encoding (false, true);
-				return e;
-			} catch (ArgumentException) {
-				throw new UnsupportedCharsetException (name);
-			}
-		}
+//		public static Encoding GetEncoding (string name)
+//		{
+////			Encoding e = Encoding.GetEncoding (name, EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+//			try {
+//				Encoding e = Encoding.GetEncoding (name.Replace ('_','-'));
+//				if (e is UTF8Encoding)
+//					return new UTF8Encoding (false, true);
+//				return e;
+//			} catch (ArgumentException) {
+//				throw new UnsupportedCharsetException (name);
+//			}
+//		}
 		
-		public static ICollection<KeyValuePair<T, U>> EntrySet<T, U> (this IDictionary<T, U> s)
-		{
-			return s;
-		}
+//		public static ICollection<KeyValuePair<T, U>> EntrySet<T, U> (this IDictionary<T, U> s)
+//		{
+//			return s;
+//		}
 		
 		public static bool AddItem<T> (this IList<T> list, T item)
 		{
@@ -226,10 +226,10 @@ namespace Sharpen
         //    return InputStream.Wrap (manifestResourceStream);
         //}
 
-		public static long GetTime (this DateTime dateTime)
-		{
-			return new DateTimeOffset (DateTime.SpecifyKind (dateTime, DateTimeKind.Utc), TimeSpan.Zero).ToMillisecondsSinceEpoch ();
-		}
+		//public static long GetTime (this DateTime dateTime)
+		//{
+		//	return new DateTimeOffset (DateTime.SpecifyKind (dateTime, DateTimeKind.Utc), TimeSpan.Zero).ToMillisecondsSinceEpoch ();
+		//}
 
         //public static TimeZoneInfo GetTimeZone (string tzone)
         //{
@@ -306,22 +306,22 @@ namespace Sharpen
 			return new ListIterator<T> (col, n);
 		}
 
-		public static int LowestOneBit (int val)
-		{
-			return (((int)1) << NumberOfTrailingZeros (val));
-		}
+		//public static int LowestOneBit (int val)
+		//{
+		//	return (((int)1) << NumberOfTrailingZeros (val));
+		//}
 
-		public static bool Matches (this string str, string regex)
-		{
-			Regex regex2 = new Regex (regex);
-			return regex2.IsMatch (str);
-		}
+		//public static bool Matches (this string str, string regex)
+		//{
+		//	Regex regex2 = new Regex (regex);
+		//	return regex2.IsMatch (str);
+		//}
 		
-		public static DateTime CreateDate (long milliSecondsSinceEpoch)
-		{
-			long num = EPOCH_TICKS + (milliSecondsSinceEpoch * 10000);
-			return new DateTime (num);
-		}
+		//public static DateTime CreateDate (long milliSecondsSinceEpoch)
+		//{
+		//	long num = EPOCH_TICKS + (milliSecondsSinceEpoch * 10000);
+		//	return new DateTime (num);
+		//}
 
 		public static DateTimeOffset MillisToDateTimeOffset (long milliSecondsSinceEpoch, long offsetMinutes)
 		{
@@ -340,16 +340,16 @@ namespace Sharpen
         //    return new CharsetEncoder (enc);
         //}
 
-		public static int NumberOfLeadingZeros (int val)
-		{
-			uint num = (uint)val;
-			int count = 0;
-			while ((num & 0x80000000) == 0) {
-				num = num << 1;
-				count++;
-			}
-			return count;
-		}
+		//public static int NumberOfLeadingZeros (int val)
+		//{
+		//	uint num = (uint)val;
+		//	int count = 0;
+		//	while ((num & 0x80000000) == 0) {
+		//		num = num << 1;
+		//		count++;
+		//	}
+		//	return count;
+		//}
 
 		public static int NumberOfTrailingZeros (int val)
 		{
@@ -362,21 +362,21 @@ namespace Sharpen
 			return count;
 		}
 
-		public static int Read (this StreamReader reader, char[] data)
-		{
-			return reader.Read (data, 0, data.Length);
-		}
+		//public static int Read (this StreamReader reader, char[] data)
+		//{
+		//	return reader.Read (data, 0, data.Length);
+		//}
 
-		public static T Remove<T> (this IList<T> list, T item)
-		{
-			int index = list.IndexOf (item);
-			if (index == -1) {
-				return default(T);
-			}
-			T local = list[index];
-			list.RemoveAt (index);
-			return local;
-		}
+		//public static T Remove<T> (this IList<T> list, T item)
+		//{
+		//	int index = list.IndexOf (item);
+		//	if (index == -1) {
+		//		return default(T);
+		//	}
+		//	T local = list[index];
+		//	list.RemoveAt (index);
+		//	return local;
+		//}
 
 		public static T Remove<T> (this IList<T> list, int i)
 		{
@@ -421,44 +421,44 @@ namespace Sharpen
 			return rgx.Replace (str, replacement);
 		}
 		
-		public static bool RegionMatches (this string str, bool ignoreCase, int toOffset, string other, int ooffset, int len)
-		{
-			if (toOffset < 0 || ooffset < 0 || toOffset + len > str.Length || ooffset + len > other.Length)
-				return false;
-			return string.Compare (str, toOffset, other, ooffset, len) == 0;
-		}
+		//public static bool RegionMatches (this string str, bool ignoreCase, int toOffset, string other, int ooffset, int len)
+		//{
+		//	if (toOffset < 0 || ooffset < 0 || toOffset + len > str.Length || ooffset + len > other.Length)
+		//		return false;
+		//	return string.Compare (str, toOffset, other, ooffset, len) == 0;
+		//}
 
-		public static T Set<T> (this IList<T> list, int index, T item)
-		{
-			T old = list[index];
-			list[index] = item;
-			return old;
-		}
+		//public static T Set<T> (this IList<T> list, int index, T item)
+		//{
+		//	T old = list[index];
+		//	list[index] = item;
+		//	return old;
+		//}
 
-		public static int Signum (long val)
-		{
-			if (val < 0) {
-				return -1;
-			}
-			if (val > 0) {
-				return 1;
-			}
-			return 0;
-		}
+		//public static int Signum (long val)
+		//{
+		//	if (val < 0) {
+		//		return -1;
+		//	}
+		//	if (val > 0) {
+		//		return 1;
+		//	}
+		//	return 0;
+		//}
 		
-		public static void RemoveAll<T,U> (this ICollection<T> col, ICollection<U> items) where U:T
-		{
-			foreach (var u in items)
-				col.Remove (u);
-		}
+		//public static void RemoveAll<T,U> (this ICollection<T> col, ICollection<U> items) where U:T
+		//{
+		//	foreach (var u in items)
+		//		col.Remove (u);
+		//}
 
-		public static bool ContainsAll<T,U> (this ICollection<T> col, ICollection<U> items) where U:T
-		{
-			foreach (var u in items)
-				if (!col.Any (n => (object.ReferenceEquals (n, u)) || n.Equals (u)))
-					return false;
-			return true;
-		}
+		//public static bool ContainsAll<T,U> (this ICollection<T> col, ICollection<U> items) where U:T
+		//{
+		//	foreach (var u in items)
+		//		if (!col.Any (n => (object.ReferenceEquals (n, u)) || n.Equals (u)))
+		//			return false;
+		//	return true;
+		//}
 
 		public static bool Contains<T> (this ICollection<T> col, object item)
 		{
@@ -467,23 +467,23 @@ namespace Sharpen
 			return col.Any (n => (object.ReferenceEquals (n, item)) || n.Equals (item));
 		}
 
-		public static void Sort<T> (this IList<T> list)
-		{
-			List<T> sorted = new List<T> (list);
-			sorted.Sort ();
-			for (int i = 0; i < list.Count; i++) {
-				list[i] = sorted[i];
-			}
-		}
+		//public static void Sort<T> (this IList<T> list)
+		//{
+		//	List<T> sorted = new List<T> (list);
+		//	sorted.Sort ();
+		//	for (int i = 0; i < list.Count; i++) {
+		//		list[i] = sorted[i];
+		//	}
+		//}
 
-		public static void Sort<T> (this IList<T> list, IComparer<T> comparer)
-		{
-			List<T> sorted = new List<T> (list);
-			sorted.Sort (comparer);
-			for (int i = 0; i < list.Count; i++) {
-				list[i] = sorted[i];
-			}
-		}
+		//public static void Sort<T> (this IList<T> list, IComparer<T> comparer)
+		//{
+		//	List<T> sorted = new List<T> (list);
+		//	sorted.Sort (comparer);
+		//	for (int i = 0; i < list.Count; i++) {
+		//		list[i] = sorted[i];
+		//	}
+		//}
 
 		public static string[] Split (this string str, string regex)
 		{
@@ -536,68 +536,68 @@ namespace Sharpen
 			return (CharSequence)str.Substring (start, end);
 		}
 
-		public static char[] ToCharArray (this string str)
-		{
-			char[] destination = new char[str.Length];
-			str.CopyTo (0, destination, 0, str.Length);
-			return destination;
-		}
+		//public static char[] ToCharArray (this string str)
+		//{
+		//	char[] destination = new char[str.Length];
+		//	str.CopyTo (0, destination, 0, str.Length);
+		//	return destination;
+		//}
 
-		public static long ToMillisecondsSinceEpoch (this DateTime dateTime)
-		{
-			if (dateTime.Kind != DateTimeKind.Utc) {
-				throw new ArgumentException ("dateTime is expected to be expressed as a UTC DateTime", "dateTime");
-			}
-			return new DateTimeOffset (DateTime.SpecifyKind (dateTime, DateTimeKind.Utc), TimeSpan.Zero).ToMillisecondsSinceEpoch ();
-		}
+		//public static long ToMillisecondsSinceEpoch (this DateTime dateTime)
+		//{
+		//	if (dateTime.Kind != DateTimeKind.Utc) {
+		//		throw new ArgumentException ("dateTime is expected to be expressed as a UTC DateTime", "dateTime");
+		//	}
+		//	return new DateTimeOffset (DateTime.SpecifyKind (dateTime, DateTimeKind.Utc), TimeSpan.Zero).ToMillisecondsSinceEpoch ();
+		//}
 
-		public static long ToMillisecondsSinceEpoch (this DateTimeOffset dateTimeOffset)
-		{
-			return (((dateTimeOffset.Ticks - dateTimeOffset.Offset.Ticks) - EPOCH_TICKS) / TimeSpan.TicksPerMillisecond);
-		}
+		//public static long ToMillisecondsSinceEpoch (this DateTimeOffset dateTimeOffset)
+		//{
+		//	return (((dateTimeOffset.Ticks - dateTimeOffset.Offset.Ticks) - EPOCH_TICKS) / TimeSpan.TicksPerMillisecond);
+		//}
 
-		public static string ToOctalString (int val)
-		{
-			return Convert.ToString (val, 8);
-		}
+		//public static string ToOctalString (int val)
+		//{
+		//	return Convert.ToString (val, 8);
+		//}
 
-		public static string ToHexString (int val)
-		{
-			return Convert.ToString (val, 16);
-		}
+		//public static string ToHexString (int val)
+		//{
+		//	return Convert.ToString (val, 16);
+		//}
 
-		public static string ToString (object val)
-		{
-			return val.ToString ();
-		}
+		//public static string ToString (object val)
+		//{
+		//	return val.ToString ();
+		//}
 
-		public static string ToString (int val, int bas)
-		{
-			return Convert.ToString (val, bas);
-		}
+		//public static string ToString (int val, int bas)
+		//{
+		//	return Convert.ToString (val, bas);
+		//}
 
-		public static IList<U> UpcastTo<T, U> (this IList<T> s) where T : U
-		{
-			List<U> list = new List<U> (s.Count);
-			for (int i = 0; i < s.Count; i++) {
-				list.Add ((U)s[i]);
-			}
-			return list;
-		}
+		//public static IList<U> UpcastTo<T, U> (this IList<T> s) where T : U
+		//{
+		//	List<U> list = new List<U> (s.Count);
+		//	for (int i = 0; i < s.Count; i++) {
+		//		list.Add ((U)s[i]);
+		//	}
+		//	return list;
+		//}
 
-		public static ICollection<U> UpcastTo<T, U> (this ICollection<T> s) where T : U
-		{
-			List<U> list = new List<U> (s.Count);
-			foreach (var v in s) {
-				list.Add ((U)v);
-			}
-			return list;
-		}
+		//public static ICollection<U> UpcastTo<T, U> (this ICollection<T> s) where T : U
+		//{
+		//	List<U> list = new List<U> (s.Count);
+		//	foreach (var v in s) {
+		//		list.Add ((U)v);
+		//	}
+		//	return list;
+		//}
 
-		public static T ValueOf<T> (T val)
-		{
-			return val;
-		}
+		//public static T ValueOf<T> (T val)
+		//{
+		//	return val;
+		//}
 		
         //public static string GetTestName (object obj)
         //{
@@ -638,40 +638,40 @@ namespace Sharpen
         //    return Dns.GetHostAddresses (name).FirstOrDefault ();
         //}
 		
-		public static string GetImplementationVersion (this System.Reflection.Assembly asm)
-		{
-			return asm.GetName ().Version.ToString ();
-		}
+		//public static string GetImplementationVersion (this System.Reflection.Assembly asm)
+		//{
+		//	return asm.GetName ().Version.ToString ();
+		//}
 		
-		public static string GetHost (this Uri uri)
-		{
-			return string.IsNullOrEmpty (uri.Host) ? null : uri.Host;
-		}
+		//public static string GetHost (this Uri uri)
+		//{
+		//	return string.IsNullOrEmpty (uri.Host) ? null : uri.Host;
+		//}
 		
-		public static string GetUserInfo (this Uri uri)
-		{
-			return string.IsNullOrEmpty (uri.UserInfo) ? null : uri.UserInfo;
-		}
+		//public static string GetUserInfo (this Uri uri)
+		//{
+		//	return string.IsNullOrEmpty (uri.UserInfo) ? null : uri.UserInfo;
+		//}
 		
-		public static string GetQuery (this Uri uri)
-		{
-			return string.IsNullOrEmpty (uri.Query) ? null : uri.Query;
-		}
+		//public static string GetQuery (this Uri uri)
+		//{
+		//	return string.IsNullOrEmpty (uri.Query) ? null : uri.Query;
+		//}
 		
         //public static HttpURLConnection OpenConnection (this Uri uri, Proxy p)
         //{
         //    return new HttpsURLConnection (uri, p);
         //}
 		
-		public static Uri ToURI (this Uri uri)
-		{
-			return uri;
-		}
+		//public static Uri ToURI (this Uri uri)
+		//{
+		//	return uri;
+		//}
 		
-		public static Uri ToURL (this Uri uri)
-		{
-			return uri;
-		}
+		//public static Uri ToURL (this Uri uri)
+		//{
+		//	return uri;
+		//}
 		
         //public static InputStream GetInputStream (this Socket socket)
         //{
