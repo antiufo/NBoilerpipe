@@ -10,6 +10,7 @@ using NBoilerpipe.Labels;
 using NBoilerpipe.Util;
 using Sharpen;
 using System.Globalization;
+using Shaman.Runtime;
 
 namespace NBoilerpipe
 {
@@ -27,9 +28,9 @@ namespace NBoilerpipe
         readonly IDictionary<string, TagAction> tagActions = DefaultTagActionMap.INSTANCE;
         string title = null;
 
-        internal static readonly string ANCHOR_TEXT_START = "$\ue00a";
-        internal static readonly string ANCHOR_TEXT_END = "\ue00a$";
-        internal StringBuilder tokenBuilder = new StringBuilder();
+        internal static readonly ValueString ANCHOR_TEXT_START = "\ue00a";
+        internal static readonly ValueString ANCHOR_TEXT_END = "\ue00b";
+        internal List<ValueString> tokenBuilder = new List<ValueString>();
         internal StringBuilder textBuilder = new StringBuilder();
         internal int inBody = 0;
         internal int inAnchor = 0;
@@ -106,7 +107,7 @@ namespace NBoilerpipe
             if (IsTag(node.Text))
                 node.Text = "";
 
-            char[] ch = node.Text.ToCharArray();
+            var ch = node.Text;
             int start = 0;
             int length = ch.Length;
 
@@ -130,17 +131,17 @@ namespace NBoilerpipe
                 return;
             }
             int end = start + length;
-            for (int i = start; i < end; i++)
-            {
-                if (IsWhiteSpace(ch[i]))
-                {
-                    ch[i] = ' ';
-                }
-            }
+            //for (int i = start; i < end; i++)
+            //{
+            //    if (IsWhiteSpace(ch[i]))
+            //    {
+            //        ch[i] = ' ';
+            //    }
+            //}
             while (start < end)
             {
                 c = ch[start];
-                if (c == ' ')
+                if (char.IsWhiteSpace(c))
                 {
                     startWhitespace = true;
                     start++;
@@ -154,7 +155,7 @@ namespace NBoilerpipe
             while (length > 0)
             {
                 c = ch[start + length - 1];
-                if (c == ' ')
+                if (char.IsWhiteSpace(c))
                 {
                     endWhitespace = true;
                     length--;
@@ -171,7 +172,6 @@ namespace NBoilerpipe
                     if (!sbLastWasWhitespace)
                     {
                         textBuilder.Append(' ');
-                        tokenBuilder.Append(' ');
                     }
                     sbLastWasWhitespace = true;
                 }
@@ -187,7 +187,6 @@ namespace NBoilerpipe
                 if (!sbLastWasWhitespace)
                 {
                     textBuilder.Append(' ');
-                    tokenBuilder.Append(' ');
                 }
             }
             if (blockTagLevel == -1)
@@ -197,11 +196,10 @@ namespace NBoilerpipe
             if (blockFirstNode == null) blockFirstNode = nodeStack.Peek();
 
             textBuilder.Append(ch, start, length);
-            tokenBuilder.Append(ch, start, length);
+            tokenBuilder.Add(ch.AsValueString().Substring(start, length));
             if (endWhitespace)
             {
                 textBuilder.Append(' ');
-                tokenBuilder.Append(' ');
             }
             sbLastWasWhitespace = endWhitespace;
             lastEvent = NBoilerpipeContentHandler.Event.CHARACTERS;
@@ -230,11 +228,11 @@ namespace NBoilerpipe
                 if (inBody == 0 && "TITLE".Equals(lastStartTag, StringComparison.OrdinalIgnoreCase))
                     SetTitle(tokenBuilder.ToString().Trim());
                 textBuilder.Length = 0;
-                tokenBuilder.Length = 0;
+                tokenBuilder.Clear();
                 return;
             }
 
-            int length = tokenBuilder.Length;
+            int length = tokenBuilder.Count;
             if (length == 0)
             {
                 return;
@@ -244,12 +242,12 @@ namespace NBoilerpipe
                 if (sbLastWasWhitespace)
                 {
                     textBuilder.Length = 0;
-                    tokenBuilder.Length = 0;
+                    tokenBuilder.Clear();
                     return;
                 }
             }
 
-            string[] tokens = UnicodeTokenizer.Tokenize(tokenBuilder);
+            
             int numWords = 0;
             int numLinkedWords = 0;
             int numWrappedLines = 0;
@@ -258,7 +256,7 @@ namespace NBoilerpipe
             int numTokens = 0;
             int numWordsCurrentLine = 0;
 
-            foreach (string token in tokens)
+            foreach (ValueString token in tokenBuilder)
             {
                 if (token == ANCHOR_TEXT_START)
                 {
@@ -318,11 +316,57 @@ namespace NBoilerpipe
             currentContainedTextElements = new BitSet();
             offsetBlocks++;
             textBuilder.Length = 0;
-            tokenBuilder.Length = 0;
+            tokenBuilder.Clear();
             tb.SetTagLevel(blockTagLevel);
             AddTextBlock(tb);
             blockTagLevel = -1;
         }
+
+        public static IEnumerable<ValueString> GetWords(string str)
+        {
+
+            var currentWordStart = 0;
+            var currentWordLength = 0;
+            bool prevCharWasSep = true;
+            for (int i = 0; i < str.Length; i++)
+            {
+                bool curCharIsSep;
+                char c = str[i];
+
+                if (char.IsLetterOrDigit(c) || CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.NonSpacingMark)
+
+                {
+                    if (prevCharWasSep)
+                    {
+                        currentWordLength = 0;
+                        prevCharWasSep = false;
+                    }
+                    if (currentWordLength == 0) currentWordStart = i;
+                    currentWordLength++;
+
+                    curCharIsSep = CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.OtherLetter;
+                }
+                else
+                {
+                    curCharIsSep = true;
+                }
+                if (curCharIsSep)
+                {
+                    if (currentWordLength != 0)
+                    {
+                        yield return new ValueString(str, currentWordStart, currentWordLength);
+                        currentWordLength = 0;
+                    }
+                    prevCharWasSep = true;
+                }
+            }
+            if (currentWordLength != 0)
+            {
+                yield return new ValueString(str, currentWordStart, currentWordLength);
+            }
+
+        }
+
 
         public static HtmlNode GetCommonAncestor(HtmlNode a, HtmlNode b)
         {
@@ -337,7 +381,7 @@ namespace NBoilerpipe
         private Stack<HtmlNode> nodeStack = new Stack<HtmlNode>();
 
 
-        static bool IsWord(string token)
+        static bool IsWord(ValueString token)
         {
             ////   L, Nd, Nl, No
             for (int i = 0; i < token.Length; i++)
@@ -385,7 +429,6 @@ namespace NBoilerpipe
         {
             if (!sbLastWasWhitespace)
             {
-                tokenBuilder.Append(' ');
                 textBuilder.Append(' ');
                 sbLastWasWhitespace = true;
             }
