@@ -55,20 +55,20 @@ namespace Sharpen
 			return Find ();
 		}
 
-		public string ReplaceFirst (string txt)
-		{
-			return regex.Replace (str, txt, 1);
-		}
+		//public string ReplaceFirst (string txt)
+		//{
+		//	return regex.Replace (str, txt, 1);
+		//}
 		
 		public string ReplaceAll (string txt)
 		{
 			return regex.Replace (str, txt, int.MaxValue);
 		}
 
-		public Matcher Reset (CharSequence str)
-		{
-			return Reset (str.ToString ());
-		}
+		//public Matcher Reset (CharSequence str)
+		//{
+		//	return Reset (str.ToString ());
+		//}
 
 		public Matcher Reset (string str)
 		{

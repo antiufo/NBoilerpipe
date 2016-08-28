@@ -7,7 +7,6 @@ using Shaman.Dom;
 using NBoilerpipe.Parser;
 using NBoilerpipe.Document;
 using NBoilerpipe.Labels;
-using NBoilerpipe.Util;
 using Sharpen;
 using System.Globalization;
 using Shaman.Runtime;
