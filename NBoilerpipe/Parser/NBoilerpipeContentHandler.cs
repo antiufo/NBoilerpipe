@@ -9,6 +9,7 @@ using NBoilerpipe.Document;
 using NBoilerpipe.Labels;
 using NBoilerpipe.Util;
 using Sharpen;
+using System.Globalization;
 
 namespace NBoilerpipe
 {
@@ -49,8 +50,8 @@ namespace NBoilerpipe
         internal List<List<LabelAction>> labelStacks = new List<List<LabelAction>>();
         internal List<int?> fontSizeStack = new List<int?>();
 
-        static readonly Sharpen.Pattern PAT_VALID_WORD_CHARACTER = Sharpen.Pattern
-            .Compile("[\\p{L}\\p{Nd}\\p{Nl}\\p{No}]");
+        //static readonly Sharpen.Pattern PAT_VALID_WORD_CHARACTER = Sharpen.Pattern
+        //    .Compile("[\\p{L}\\p{Nd}\\p{Nl}\\p{No}]");
 
 
         public void StartElement(HtmlNode node)
@@ -338,7 +339,19 @@ namespace NBoilerpipe
 
         static bool IsWord(string token)
         {
-            return PAT_VALID_WORD_CHARACTER.Matcher(token).Find();
+            ////   L, Nd, Nl, No
+            for (int i = 0; i < token.Length; i++)
+            {
+                var k = token[i];
+                
+                if (char.IsLetterOrDigit(k)) return true;
+                if (k < 256) continue;
+                var m = CharUnicodeInfo.GetUnicodeCategory(k);
+                
+
+                if (m == UnicodeCategory.OtherNumber || m == UnicodeCategory.LetterNumber) return true;
+            }
+            return false;
         }
 
         public TextDocument ToTextDocument()
