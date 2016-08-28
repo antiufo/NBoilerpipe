@@ -34,3 +34,6 @@ Sharpen/bin
 
 .vs
 packages
+obj
+bin
+project.lock.json
