@@ -3,7 +3,7 @@ namespace Sharpen
 	using System;
 	using System.Text.RegularExpressions;
 
-	public class Pattern
+	internal class Pattern
 	{
 		public const int CASE_INSENSITIVE = 1;
 		public const int DOTALL = 2;

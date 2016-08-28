@@ -5,7 +5,7 @@ namespace Sharpen
 	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
 
-	public static class Collections
+	internal static class Collections
 	{
 		public static bool AddAll<T> (ICollection<T> list, IEnumerable toAdd)
 		{

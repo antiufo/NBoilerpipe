@@ -4,14 +4,14 @@ namespace Sharpen
 	using System.Collections;
 	using System.Collections.Generic;
 
-	public interface Iterator
+	internal interface Iterator
 	{
 		bool HasNext ();
 		object Next ();
 		void Remove ();
 	}
 
-	public abstract class Iterator<T> : IEnumerator, IDisposable, IEnumerator<T>, Iterator
+    internal abstract class Iterator<T> : IEnumerator, IDisposable, IEnumerator<T>, Iterator
 	{
 		private T lastValue;
 

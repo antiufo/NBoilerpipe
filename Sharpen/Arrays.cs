@@ -4,7 +4,7 @@ namespace Sharpen
 	using System.Collections.Generic;
 	using System.Linq;
 
-	public class Arrays
+	internal class Arrays
 	{
 		public static List<T> AsList<T> (params T[] array)
 		{

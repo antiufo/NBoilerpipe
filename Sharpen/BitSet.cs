@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace Sharpen
+namespace NBoilerpipe.Document
 {
    /*
     * A BitSet to replace java.util.BitSet.

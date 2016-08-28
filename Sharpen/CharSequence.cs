@@ -1,6 +1,6 @@
 namespace Sharpen
 {
-	public class CharSequence
+	internal class CharSequence
 	{
 		public static implicit operator CharSequence (string str)
 		{
@@ -13,7 +13,7 @@ namespace Sharpen
 		}
 	}
 	
-	public class StringCharSequence: CharSequence
+	internal class StringCharSequence: CharSequence
 	{
 		string str;
 		

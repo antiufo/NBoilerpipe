@@ -16,7 +16,7 @@ namespace Sharpen
 	using System.Text;
 	using System.Text.RegularExpressions;
 
-	public static class Extensions
+	internal static class Extensions
 	{
 		private static readonly long EPOCH_TICKS;
 
@@ -381,12 +381,12 @@ namespace Sharpen
 		public static T Remove<T> (this IList<T> list, int i)
 		{
 			T old;
-			try {
-				old = list[i];
-				list.RemoveAt (i);
-			} catch (IndexOutOfRangeException) {
-				throw new NoSuchElementException ();
-			}
+			//try {
+		    old = list[i];
+	   		list.RemoveAt (i);
+			//} catch (IndexOutOfRangeException) {
+			//	throw new NoSuchElementException ();
+		//	}
 			return old;
 		}
 
@@ -400,26 +400,26 @@ namespace Sharpen
 			return list.Remove<T> (list.Count - 1);			
 		}
 		
-		public static string ReplaceAll (this string str, string regex, string replacement)
-		{
-			Regex rgx = new Regex (regex);
+		//public static string ReplaceAll (this string str, string regex, string replacement)
+		//{
+		//	Regex rgx = new Regex (regex);
 			
-			if (replacement.IndexOfAny (new char[] { '\\','$' }) != -1) {
-				// Back references not yet supported
-				StringBuilder sb = new StringBuilder ();
-				for (int n=0; n<replacement.Length; n++) {
-					char c = replacement [n];
-					if (c == '$')
-						throw new NotSupportedException ("Back references not supported");
-					if (c == '\\')
-						c = replacement [++n];
-					sb.Append (c);
-				}
-				replacement = sb.ToString ();
-			}
+		//	if (replacement.IndexOfAny (new char[] { '\\','$' }) != -1) {
+		//		// Back references not yet supported
+		//		StringBuilder sb = new StringBuilder ();
+		//		for (int n=0; n<replacement.Length; n++) {
+		//			char c = replacement [n];
+		//			if (c == '$')
+		//				throw new NotSupportedException ("Back references not supported");
+		//			if (c == '\\')
+		//				c = replacement [++n];
+		//			sb.Append (c);
+		//		}
+		//		replacement = sb.ToString ();
+		//	}
 			
-			return rgx.Replace (str, replacement);
-		}
+		//	return rgx.Replace (str, replacement);
+		//}
 		
 		//public static bool RegionMatches (this string str, bool ignoreCase, int toOffset, string other, int ooffset, int len)
 		//{

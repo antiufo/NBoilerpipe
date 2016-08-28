@@ -3,7 +3,7 @@ namespace Sharpen
 	using System;
 	using System.Collections.Generic;
 
-	public class EnumeratorWrapper<T> : Iterator<T>
+	internal class EnumeratorWrapper<T> : Iterator<T>
 	{
 		object collection;
 		IEnumerator<T> e;
@@ -26,7 +26,7 @@ namespace Sharpen
 		public override T Next ()
 		{
 			if (!more)
-				throw new NoSuchElementException ();
+				throw new InvalidOperationException();
 			lastVal = e.Current;
 			more = e.MoveNext ();
 			return lastVal;

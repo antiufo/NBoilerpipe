@@ -28,156 +28,156 @@ using System;
 
 namespace Sharpen
 {
-	public class BrokenBarrierException : Exception
-	{
-	}
+	//public class BrokenBarrierException : Exception
+	//{
+	//}
 
-	public class BufferUnderflowException : Exception
-	{
-	}
+	//public class BufferUnderflowException : Exception
+	//{
+	//}
 
-	public class CharacterCodingException : Exception
-	{
-	}
+	//public class CharacterCodingException : Exception
+	//{
+	//}
 
-	public class DataFormatException : Exception
-	{
-	}
+	//public class DataFormatException : Exception
+	//{
+	//}
 
-	public class EOFException : Exception
-	{
-		public EOFException ()
-		{
-		}
+	//internal class EOFException : Exception
+	//{
+	//	public EOFException ()
+	//	{
+	//	}
 
-		public EOFException (string msg) : base(msg)
-		{
-		}
-	}
+	//	public EOFException (string msg) : base(msg)
+	//	{
+	//	}
+	//}
 
-	public class Error : Exception
-	{
-		public Error ()
-		{
-		}
+	//public class Error : Exception
+	//{
+	//	public Error ()
+	//	{
+	//	}
 
-		public Error (Exception ex) : base("Runtime Exception", ex)
-		{
-		}
+	//	public Error (Exception ex) : base("Runtime Exception", ex)
+	//	{
+	//	}
 
-		public Error (string msg) : base(msg)
-		{
-		}
+	//	public Error (string msg) : base(msg)
+	//	{
+	//	}
 
-		public Error (string msg, Exception ex) : base(msg, ex)
-		{
-		}
-	}
+	//	public Error (string msg, Exception ex) : base(msg, ex)
+	//	{
+	//	}
+	//}
 
-	public class ExecutionException : Exception
-	{
-		public ExecutionException (Exception inner): base ("Execution failed", inner)
-		{
-		}
-	}
+	//public class ExecutionException : Exception
+	//{
+	//	public ExecutionException (Exception inner): base ("Execution failed", inner)
+	//	{
+	//	}
+	//}
 
-	public class InstantiationException : Exception
-	{
-	}
+	//public class InstantiationException : Exception
+	//{
+	//}
 
-	public class InterruptedIOException : Exception
-	{
-		public InterruptedIOException (string msg) : base(msg)
-		{
-		}
-	}
+	//public class InterruptedIOException : Exception
+	//{
+	//	public InterruptedIOException (string msg) : base(msg)
+	//	{
+	//	}
+	//}
 
-	public class MissingResourceException : Exception
-	{
-	}
+	//public class MissingResourceException : Exception
+	//{
+	//}
 
-	public class NoSuchAlgorithmException : Exception
-	{
-	}
+	//public class NoSuchAlgorithmException : Exception
+	//{
+	//}
 
-	public class NoSuchElementException : Exception
-	{
-	}
+	//public class NoSuchElementException : Exception
+	//{
+	//}
 
-	public class NoSuchMethodException : Exception
-	{
-	}
+	//public class NoSuchMethodException : Exception
+	//{
+	//}
 
-	public class OverlappingFileLockException : Exception
-	{
-	}
+	//public class OverlappingFileLockException : Exception
+	//{
+	//}
 
-	public class RuntimeException : Exception
-	{
-		public RuntimeException ()
-		{
-		}
+	//public class RuntimeException : Exception
+	//{
+	//	public RuntimeException ()
+	//	{
+	//	}
 
-		public RuntimeException (Exception ex) : base("Runtime Exception", ex)
-		{
-		}
+	//	public RuntimeException (Exception ex) : base("Runtime Exception", ex)
+	//	{
+	//	}
 
-		public RuntimeException (string msg) : base(msg)
-		{
-		}
+	//	public RuntimeException (string msg) : base(msg)
+	//	{
+	//	}
 
-		public RuntimeException (string msg, Exception ex) : base(msg, ex)
-		{
-		}
-	}
+	//	public RuntimeException (string msg, Exception ex) : base(msg, ex)
+	//	{
+	//	}
+	//}
 
-	public class StringIndexOutOfBoundsException : Exception
-	{
-	}
+	//public class StringIndexOutOfBoundsException : Exception
+	//{
+	//}
 
-	public class UnknownHostException : Exception
-	{
-	}
+	//public class UnknownHostException : Exception
+	//{
+	//}
 
-	public class UnsupportedEncodingException : Exception
-	{
-	}
+	//public class UnsupportedEncodingException : Exception
+	//{
+	//}
 
-	public  class URISyntaxException : Exception
-	{
-		public URISyntaxException (string s, string msg) : base(s + " " + msg)
-		{
-		}
-	}
+	//public  class URISyntaxException : Exception
+	//{
+	//	public URISyntaxException (string s, string msg) : base(s + " " + msg)
+	//	{
+	//	}
+	//}
 
-	public class ZipException : Exception
-	{
-	}
+	//public class ZipException : Exception
+	//{
+	//}
 
 	
-	public class ConnectException: Exception
-	{
-		public ConnectException (string msg): base (msg)
-		{
-		}
-	}
+	//public class ConnectException: Exception
+	//{
+	//	public ConnectException (string msg): base (msg)
+	//	{
+	//	}
+	//}
 	
-	public class KeyManagementException: Exception
-	{
-	}
+	//public class KeyManagementException: Exception
+	//{
+	//}
 	
-	public class IllegalCharsetNameException: Exception
-	{
-		public IllegalCharsetNameException (string msg): base (msg)
-		{
-		}
-	}
+	//public class IllegalCharsetNameException: Exception
+	//{
+	//	public IllegalCharsetNameException (string msg): base (msg)
+	//	{
+	//	}
+	//}
 	
-	public class UnsupportedCharsetException: Exception
-	{
-		public UnsupportedCharsetException (string msg): base (msg)
-		{
-		}
-	}
+	//public class UnsupportedCharsetException: Exception
+	//{
+	//	public UnsupportedCharsetException (string msg): base (msg)
+	//	{
+	//	}
+	//}
 }
 

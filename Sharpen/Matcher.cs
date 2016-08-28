@@ -3,7 +3,7 @@ namespace Sharpen
 	using System;
 	using System.Text.RegularExpressions;
 
-	public class Matcher
+	internal class Matcher
 	{
 		private int current;
 		private MatchCollection matches;

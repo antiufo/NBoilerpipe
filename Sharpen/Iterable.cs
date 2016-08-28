@@ -4,7 +4,7 @@ namespace Sharpen
 	using System.Collections;
 	using System.Collections.Generic;
 
-	public abstract class Iterable<T> : IEnumerable, IEnumerable<T>
+    internal abstract class Iterable<T> : IEnumerable, IEnumerable<T>
 	{
 		protected Iterable ()
 		{

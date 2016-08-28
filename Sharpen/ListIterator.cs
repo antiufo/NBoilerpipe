@@ -3,7 +3,7 @@ namespace Sharpen
 	using System;
 	using System.Collections.Generic;
 
-	public class ListIterator<T>
+	internal class ListIterator<T>
 	{
 		private IList<T> list;
 		private int pos;

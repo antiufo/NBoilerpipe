@@ -29,7 +29,7 @@ using System.Collections;
 
 namespace Sharpen
 {
-	public class AList<T>: List<T>
+	internal class AList<T>: List<T>
 	{
 		public AList ()
 		{
