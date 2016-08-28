@@ -103,8 +103,6 @@ namespace NBoilerpipe
 
         public void HandleText(HtmlTextNode node)
         {
-            if (IsTag(node.Text))
-                node.Text = "";
 
             var ch = node.Text;
             int start = 0;
