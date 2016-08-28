@@ -9,7 +9,6 @@ using System.Text;
 using Sharpen;
 using Shaman.Dom;
 using NBoilerpipe.Document;
-using Sharper;
 
 namespace NBoilerpipe.Document
 {
@@ -20,7 +19,7 @@ namespace NBoilerpipe.Document
     /// interrupted by any HTML markup) or a compound of such atomic elements.
     /// </remarks>
     /// <author>Christian Kohlsch√ºtter</author>
-    public class TextBlock : ICloneable
+    public class TextBlock
     {
         internal bool isContent = false;
         CharSequence text;
@@ -276,7 +275,7 @@ namespace NBoilerpipe.Document
             return containedTextElements;
         }
 
-        public Object Clone()
+        public TextBlock Clone()
         {
             TextBlock clone = new TextBlock(text.ToString(), Node);
 

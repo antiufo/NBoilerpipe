@@ -1,0 +1,52 @@
+{
+  "version": "1.0.1.1",
+  "buildOptions": {
+    "keyFile": "../Key.snk",
+    "compile": {
+      "exclude": [
+        "../obj/**/*.cs",
+        "obj/**/*.cs",
+        "../Util/HttpUtility.cs",
+        "../BoilerpipeProcessingException.cs"
+      ],
+      "include": [
+        "../**/*.cs",
+        "../../Sharpen/AList.cs",
+        "../../Sharpen/Arrays.cs",
+        "../../Sharpen/BitSet.cs",
+        "../../Sharpen/ByteOrder.cs",
+        "../../Sharpen/CharSequence.cs",
+        "../../Sharpen/Collections.cs",
+        "../../Sharpen/EnumerableWrapper.cs",
+        "../../Sharpen/EnumeratorWrapper.cs",
+        "../../Sharpen/Exceptions.cs",
+        "../../Sharpen/Extensions.cs",
+        "../../Sharpen/Iterable.cs",
+        "../../Sharpen/Iterator.cs",
+        "../../Sharpen/ListIterator.cs",
+        "../../Sharpen/Matcher.cs",
+        "../../Sharpen/Pattern.cs"
+      ]
+    }
+  },
+  "dependencies": {
+    "Shaman.Dom": "1.0.1.15"
+  },
+  "frameworks": {
+    "net46": {
+      "frameworkAssemblies": {}
+    },
+    "netstandard1.3": {
+      "dependencies": {
+        "System.Runtime": "4.1",
+        "System.Runtime.Extensions": "4.1",
+        "System.IO": "4.1",
+        "System.Globalization": "4.0.11",
+        "System.Text.RegularExpressions": "4.1.0",
+        "System.Collections.Specialized": "4.0.1",
+        "System.Linq": "4.0.1",
+        "System.Diagnostics.Debug": "4.0.11"
+      }
+    }
+  }
+}

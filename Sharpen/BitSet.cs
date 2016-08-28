@@ -1,5 +1,4 @@
-﻿using Sharper;
-using System;
+﻿using System;
 using System.Collections;
 
 namespace Sharpen
@@ -21,7 +20,7 @@ namespace Sharpen
     * @author <br><a href="mailto:pete@yamuna.demon.co.uk">Pete Wells</a>
     */
 
-    public class BitSet : ICloneable
+    public class BitSet
     {
         protected internal const int BITS = 64; // number of bits / long
         protected internal const int NIBBLE = 4;
@@ -116,7 +115,7 @@ namespace Sharpen
             dataBits[n] &= ~BitMask(el);
         }
 
-        public virtual object Clone()
+        public BitSet Clone()
         {
             BitSet s;
             
